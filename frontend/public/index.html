@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>رزرو هتل - سامانه رزرواسیون</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<nav class="topnav">
+    <div class="container nav-inner">
+        <div class="brand">رزرو هتل</div>
+        <ul class="nav-links">
+            <li><a href="#">هتل</a></li>
+            <li><a href="#">پرواز</a></li>
+            <li><a href="#">قطار</a></li>
+            <li><a href="#">اتوبوس</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="btn ghost">ورود</button>
+            <button class="btn primary">ثبت‌نام</button>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <h1>جستجو و رزرو هتل</h1>
+        <p class="muted">مقصد را انتخاب کنید، تاریخ‌ها را وارد کنید و بهترین اتاق‌ها را ببینید.</p>
+        <div class="searchbar">
+            <div class="field">
+                <label>هتل</label>
+                <select id="hotelSelect"></select>
+            </div>
+            <div class="field">
+                <label>از تاریخ</label>
+                <input id="fromDate" type="date">
+            </div>
+            <div class="field">
+                <label>تا تاریخ</label>
+                <input id="toDate" type="date">
+            </div>
+            <button class="btn primary xl" id="searchBtn">جستجو</button>
+        </div>
+        <div id="message"></div>
+    </div>
+</section>
+
+<div class="container page">
+    <aside class="filters">
+        <h3>فیلترها</h3>
+        <label class="checkbox">
+            <input id="filterSuite" type="checkbox"> فقط سوئیت‌ها
+        </label>
+        <label class="checkbox">
+            <input id="filterCapacity3" type="checkbox"> ظرفیت ۳ نفر به بالا
+        </label>
+        <p class="hint muted">فیلترها صرفاً نمایشی‌اند؛ لیست اتاق‌ها از API بک‌اند می‌آید.</p>
+    </aside>
+
+    <main class="content">
+        <section>
+            <h2>هتل‌های پیشنهادی</h2>
+            <div class="grid" id="hotelsGrid"></div>
+        </section>
+
+        <section class="results">
+            <h2>اتاق‌های موجود</h2>
+            <div class="grid grid-rooms" id="roomsGrid"></div>
+        </section>
+
+        <section class="reservation">
+            <h2>ثبت رزرو</h2>
+            <div class="card hidden" id="reservationForm">
+                <p>اتاق انتخاب شده: <b id="selectedRoom"></b></p>
+                <div class="form-row">
+                    <input id="guestName" placeholder="نام و نام خانوادگی" type="text">
+                    <input id="guestEmail" placeholder="ایمیل" type="email">
+                    <button class="btn success" id="reserveBtn">ثبت رزرو</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2025 سامانه رزرواسیون</p>
+    </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
+

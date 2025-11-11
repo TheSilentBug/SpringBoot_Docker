@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.4
+    container_name: hotel_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: hotel_db
+      MYSQL_USER: hotel
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u$$MYSQL_USER -p$$MYSQL_PASSWORD || exit 1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: ./backend
+    container_name: hotel_backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: hotel_db
+      DB_USER: hotel
+      DB_PASSWORD: password
+      PORT: 8080
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    container_name: hotel_frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+    volumes:
+      # Optionally override API base url without rebuilding:
+      # - ./frontend/public/config.docker.js:/usr/share/nginx/html/config.js:ro
+      # Default uses localhost for non-docker runs; within compose, we mount a config too:
+      - ./frontend/public/config.js:/usr/share/nginx/html/config.js:ro
+
+volumes:
+  db_data:
+
+
