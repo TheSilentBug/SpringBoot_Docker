@@ -1,20 +1,20 @@
-spring:
+spring: # تست profile settings
   datasource:
-    url: jdbc:h2:mem:hoteldb;DB_CLOSE_DELAY=-1;MODE=MySQL
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:h2:mem:hoteldb;DB_CLOSE_DELAY=-1;MODE=MySQL # H2 in-memory DB emulating MySQL
+    driver-class-name: org.h2.Driver # H2 driver class
+    username: sa # Default H2 user
+    password: # Empty password for tests
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create-drop # Create schema for each test run
     properties:
       hibernate:
-        format_sql: true
+        format_sql: true # Pretty-print SQL in logs
   jackson:
     serialization:
-      write-dates-as-timestamps: false
+      write-dates-as-timestamps: false # Use ISO dates
 logging:
   level:
-    org.hibernate.SQL: warn
+    org.hibernate.SQL: warn # Reduce SQL verbosity
 
 

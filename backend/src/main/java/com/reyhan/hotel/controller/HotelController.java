@@ -1,57 +1,57 @@
-package com.reyhan.hotel.controller;
+package com.reyhan.hotel.controller; // پکیج مربوط به کنترلرهای REST
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDate; // نوع تاریخ برای فیلتر کردن اتاق‌ها
+import java.util.List; // برای بازگرداندن مجموعه نتایج
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat; // تبدیل رشته تاریخ ورودی به LocalDate
+import org.springframework.http.ResponseEntity; // ساخت پاسخ HTTP با وضعیت مناسب
+import org.springframework.web.bind.annotation.CrossOrigin; // مجوز دسترسی از دامنه‌های دیگر
+import org.springframework.web.bind.annotation.GetMapping; // نگاشت درخواست GET
+import org.springframework.web.bind.annotation.PathVariable; // خواندن متغیر مسیر از URL
+import org.springframework.web.bind.annotation.RequestMapping; // تعریف مسیر پایه کنترلر
+import org.springframework.web.bind.annotation.RequestParam; // خواندن پارامتر query string
+import org.springframework.web.bind.annotation.RestController; // ترکیب @Controller و @ResponseBody
 
-import com.reyhan.hotel.entity.Hotel;
-import com.reyhan.hotel.entity.Room;
-import com.reyhan.hotel.repository.HotelRepository;
-import com.reyhan.hotel.repository.RoomRepository;
+import com.reyhan.hotel.entity.Hotel; // مدل داده هتل
+import com.reyhan.hotel.entity.Room; // مدل داده اتاق
+import com.reyhan.hotel.repository.HotelRepository; // مخزن CRUD برای هتل
+import com.reyhan.hotel.repository.RoomRepository; // مخزن برای جستجوی اتاق‌ها
 
 /**
  * کنترلر REST API برای مدیریت هتل‌ها و اتاق‌ها
  * این کلاس endpointهای مربوط به لیست هتل‌ها و اتاق‌ها را فراهم می‌کند
  */
-@RestController
-@RequestMapping("/api/hotels")
-@CrossOrigin
-public class HotelController {
+@RestController // مشخص می‌کند پاسخ‌ها JSON است
+@RequestMapping("/api/hotels") // مسیر پایه برای تمام متدها
+@CrossOrigin // فعال‌سازی CORS برای فرانت‌اند
+public class HotelController { // تعریف کلاس کنترلر
 	/**
 	 * مخزن داده‌های هتل برای دسترسی به اطلاعات هتل‌ها
 	 */
-	private final HotelRepository hotelRepository;
+	private final HotelRepository hotelRepository; // وابستگی به مخزن هتل
 	
 	/**
 	 * مخزن داده‌های اتاق برای جستجوی اتاق‌های موجود
 	 */
-	private final RoomRepository roomRepository;
+	private final RoomRepository roomRepository; // وابستگی به مخزن اتاق
 
 	/**
 	 * سازنده کنترلر که وابستگی‌ها را تزریق می‌کند
 	 * @param hotelRepository مخزن هتل‌ها
 	 * @param roomRepository مخزن اتاق‌ها
 	 */
-	public HotelController(HotelRepository hotelRepository, RoomRepository roomRepository) {
-		this.hotelRepository = hotelRepository;
-		this.roomRepository = roomRepository;
+	public HotelController(HotelRepository hotelRepository, RoomRepository roomRepository) { // سازنده با تزریق وابستگی
+		this.hotelRepository = hotelRepository; // مقداردهی مخزن هتل
+		this.roomRepository = roomRepository; // مقداردهی مخزن اتاق
 	}
 
 	/**
 	 * دریافت لیست تمام هتل‌های موجود در سیستم
 	 * @return لیست تمام هتل‌ها
 	 */
-	@GetMapping
-	public List<Hotel> listHotels() {
-		return hotelRepository.findAll();
+	@GetMapping // هندلر GET /api/hotels
+	public List<Hotel> listHotels() { // متد بازگرداننده هتل‌ها
+		return hotelRepository.findAll(); // خواندن تمام رکوردها از دیتابیس
 	}
 
 	/**
@@ -65,19 +65,17 @@ public class HotelController {
 	 * @param to تاریخ پایان بازه زمانی (برای جستجوی اتاق‌های موجود)
 	 * @return لیست اتاق‌ها یا 404 اگر هتل پیدا نشود
 	 */
-	@GetMapping("/{id}/rooms")
-	public ResponseEntity<List<Room>> listRooms(@PathVariable Long id,
-	                                            @RequestParam(required = false) Boolean available,
-	                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
-	                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
-		// اگر درخواست برای اتاق‌های موجود است و تاریخ‌ها ارسال شده‌اند
-		if (Boolean.TRUE.equals(available) && from != null && to != null) {
-			return ResponseEntity.ok(roomRepository.findAvailableRooms(id, from, to));
+	@GetMapping("/{id}/rooms") // هندلر GET برای اتاق‌های یک هتل
+	public ResponseEntity<List<Room>> listRooms(@PathVariable Long id, // شناسه هتل از URL
+	                                            @RequestParam(required = false) Boolean available, // پارامتر اختیاری وضعیت
+	                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from, // تاریخ شروع فیلتر
+	                                            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) { // تاریخ پایان فیلتر
+		if (Boolean.TRUE.equals(available) && from != null && to != null) { // بررسی درخواست اتاق‌های آزاد
+			return ResponseEntity.ok(roomRepository.findAvailableRooms(id, from, to)); // بازگرداندن لیست اتاق‌های آزاد
 		}
-		// در غیر این صورت تمام اتاق‌های هتل را برمی‌گرداند
-		return hotelRepository.findById(id)
-			.map(h -> ResponseEntity.ok(h.getRooms()))
-			.orElse(ResponseEntity.notFound().build());
+		return hotelRepository.findById(id) // جستجوی هتل با شناسه
+			.map(h -> ResponseEntity.ok(h.getRooms())) // تبدیل به پاسخ شامل اتاق‌ها
+			.orElse(ResponseEntity.notFound().build()); // در صورت نبود هتل، برگرداندن 404
 	}
 }
 

@@ -1,5 +1,5 @@
 // تابع کمکی برای انتخاب المان‌های DOM با استفاده از querySelector
-const $ = (s) => document.querySelector(s);
+const $ = (s) => document.querySelector(s); // انتخاب اولین المان مطابق سِلِکتور
 
 // انتخاب تمام المان‌های مورد نیاز از صفحه HTML
 const hotelSelect = $('#hotelSelect'); // لیست کشویی انتخاب هتل
@@ -16,36 +16,36 @@ const hotelsGrid = $('#hotelsGrid'); // المان نمایش کارت‌های 
 const roomsGrid = $('#roomsGrid'); // المان نمایش کارت‌های اتاق‌ها
 
 // متغیر برای نگهداری شناسه اتاق انتخاب شده
-let selectedRoomId = null;
+let selectedRoomId = null; // نگهداری شناسه اتاق انتخاب شده
 
 // تابع کمکی برای ساخت URL کامل API با استفاده از آدرس بک‌اند
-const api = (path) => `${window.BACKEND_BASE_URL}${path}`;
+const api = (path) => `${window.BACKEND_BASE_URL}${path}`; // ساخت URL کامل برای درخواست
 
 /**
  * بارگذاری لیست هتل‌ها از API و نمایش آن‌ها در صفحه
  * این تابع هتل‌ها را از سرور دریافت می‌کند و آن‌ها را در لیست کشویی و کارت‌ها نمایش می‌دهد
  */
-async function loadHotels() {
+async function loadHotels() { // دریافت لیست هتل‌ها از سرور
     try {
         // درخواست GET به API برای دریافت لیست هتل‌ها
-        const res = await fetch(api('/api/hotels'));
-        const data = await res.json();
+        const res = await fetch(api('/api/hotels')); // ارسال درخواست HTTP
+        const data = await res.json(); // تبدیل پاسخ به JSON
         
         // پاک کردن لیست کشویی قبل از پر کردن مجدد
-        hotelSelect.innerHTML = '';
+        hotelSelect.innerHTML = ''; // حذف گزینه‌های قبلی
         
         // اضافه کردن هر هتل به لیست کشویی
-        for (const h of data) {
-            const opt = document.createElement('option');
-            opt.value = h.id;
-            opt.textContent = `${h.name} - ${h.city}`;
-            hotelSelect.appendChild(opt);
+        for (const h of data) { // پیمایش تمام هتل‌ها
+            const opt = document.createElement('option'); // ایجاد گزینه جدید
+            opt.value = h.id; // تنظیم مقدار به شناسه هتل
+            opt.textContent = `${h.name} - ${h.city}`; // نمایش نام و شهر
+            hotelSelect.appendChild(opt); // افزودن گزینه به لیست
         }
         
         // نمایش کارت‌های هتل‌ها در بخش پیشنهادی
-        await renderHotelCards(data);
+        await renderHotelCards(data); // فراخوانی رندر کارت‌ها
     } catch (e) {
-        showError('خطا در دریافت لیست هتل‌ها');
+        showError('خطا در دریافت لیست هتل‌ها'); // نمایش پیام خطا
     }
 }
 
@@ -53,8 +53,8 @@ async function loadHotels() {
  * نمایش پیام خطا به کاربر
  * @param {string} text متن پیام خطا
  */
-function showError(text) {
-    message.textContent = text;
+function showError(text) { // نمایش خطای کاربری
+    message.textContent = text; // قرار دادن متن پیام
     message.className = 'err'; // کلاس CSS برای نمایش خطا با رنگ قرمز
 }
 
@@ -62,8 +62,8 @@ function showError(text) {
  * نمایش پیام موفقیت به کاربر
  * @param {string} text متن پیام موفقیت
  */
-function showOk(text) {
-    message.textContent = text;
+function showOk(text) { // نمایش پیام موفقیت
+    message.textContent = text; // تنظیم متن پیام
     message.className = 'ok'; // کلاس CSS برای نمایش موفقیت با رنگ سبز
 }
 
@@ -72,26 +72,26 @@ function showOk(text) {
  * این تابع کارت‌های اتاق‌ها را ایجاد می‌کند و در صفحه نمایش می‌دهد
  * @param {Array} rooms آرایه‌ای از اشیاء اتاق
  */
-function renderRooms(rooms) {
+function renderRooms(rooms) { // رندر کارت‌های اتاق
     // پاک کردن محتوای قبلی
-    roomsGrid.innerHTML = '';
+    roomsGrid.innerHTML = ''; // تخلیه ظرف کارت‌ها
     
     // اگر اتاقی پیدا نشد، پیام مناسب نمایش داده می‌شود
-    if (!rooms.length) {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.textContent = 'اتاقی یافت نشد';
-        roomsGrid.appendChild(div);
-        return;
+    if (!rooms.length) { // بررسی خالی بودن آرایه
+        const div = document.createElement('div'); // ساخت کارت پیام
+        div.className = 'card'; // تعیین کلاس کارت
+        div.textContent = 'اتاقی یافت نشد'; // متن اطلاع‌رسانی
+        roomsGrid.appendChild(div); // افزودن کارت به گرید
+        return; // خروج از تابع
     }
     
     // ایجاد کارت برای هر اتاق
-    for (const r of rooms) {
-        const card = document.createElement('div');
-        card.className = 'card room-card';
+    for (const r of rooms) { // پیمایش اتاق‌ها
+        const card = document.createElement('div'); // ساخت کارت
+        card.className = 'card room-card'; // تعیین کلاس‌های ظاهری
         
         // ساخت HTML کارت اتاق شامل شماره، نوع، ظرفیت و قیمت
-        card.innerHTML = `
+        card.innerHTML = ` // قالب HTML داخلی کارت
 			<div class="title"><b>اتاق ${r.number}</b><span class="pill">${r.type}</span></div>
 			<p class="muted">ظرفیت: ${r.capacity} نفر</p>
 			<p class="price">${r.pricePerNight.toLocaleString('fa-IR')} تومان / شب</p>
@@ -99,18 +99,18 @@ function renderRooms(rooms) {
 		`;
         
         // اضافه کردن رویداد کلیک به دکمه انتخاب اتاق
-        card.querySelector('button').addEventListener('click', (ev) => {
+        card.querySelector('button').addEventListener('click', (ev) => { // هندلر انتخاب اتاق
             // ذخیره شناسه اتاق انتخاب شده
-            selectedRoomId = Number(ev.currentTarget.dataset.id);
+            selectedRoomId = Number(ev.currentTarget.dataset.id); // خواندن data-id و تبدیل به عدد
             // نمایش شماره اتاق در فرم رزرو
-            selectedRoomSpan.textContent = ev.currentTarget.dataset.label;
+            selectedRoomSpan.textContent = ev.currentTarget.dataset.label; // نمایش شماره اتاق
             // نمایش فرم رزرو
-            reservationForm.classList.remove('hidden');
-            showOk('اتاق انتخاب شد. اطلاعات رزرو را وارد کنید.');
+            reservationForm.classList.remove('hidden'); // حذف حالت مخفی
+            showOk('اتاق انتخاب شد. اطلاعات رزرو را وارد کنید.'); // اطلاع‌رسانی موفقیت انتخاب
         });
         
         // اضافه کردن کارت به صفحه
-        roomsGrid.appendChild(card);
+        roomsGrid.appendChild(card); // رندر کارت در شبکه
     }
 }
 
@@ -118,36 +118,36 @@ function renderRooms(rooms) {
  * جستجوی اتاق‌های موجود یک هتل در بازه زمانی مشخص
  * این تابع با استفاده از API، اتاق‌های موجود را پیدا می‌کند و نمایش می‌دهد
  */
-async function searchRooms() {
+async function searchRooms() { // جستجوی اتاق‌های موجود
     // پاک کردن پیام‌های قبلی
-    message.textContent = '';
+    message.textContent = ''; // حذف متن پیام
     
     // دریافت مقادیر از فرم
-    const hotelId = Number(hotelSelect.value);
-    const from = fromDate.value;
-    const to = toDate.value;
+    const hotelId = Number(hotelSelect.value); // شناسه هتل انتخاب شده
+    const from = fromDate.value; // تاریخ شروع
+    const to = toDate.value; // تاریخ پایان
     
     // بررسی اینکه تمام فیلدها پر شده‌اند
-    if (!hotelId || !from || !to) {
-        showError('هتل، تاریخ شروع و پایان را وارد کنید.');
-        return;
+    if (!hotelId || !from || !to) { // اعتبارسنجی ورودی‌ها
+        showError('هتل، تاریخ شروع و پایان را وارد کنید.'); // پیام خطا برای فیلد خالی
+        return; // خروج از تابع
     }
     
     try {
         // ساخت URL برای درخواست API با پارامترهای جستجو
-        const url = api(`/api/hotels/${hotelId}/rooms?available=true&from=${from}&to=${to}`);
-        const res = await fetch(url);
+        const url = api(`/api/hotels/${hotelId}/rooms?available=true&from=${from}&to=${to}`); // مسیر با query string
+        const res = await fetch(url); // ارسال درخواست به سرور
         
         // بررسی موفقیت درخواست
-        if (!res.ok) throw new Error();
+        if (!res.ok) throw new Error(); // در صورت خطا استثناء ایجاد می‌کند
         
         // دریافت داده‌های اتاق‌ها
-        const data = await res.json();
+        const data = await res.json(); // تبدیل پاسخ به JSON
         
         // نمایش اتاق‌های پیدا شده
-        renderRooms(data);
+        renderRooms(data); // رندر لیست اتاق‌ها
     } catch {
-        showError('خطا در جستجوی اتاق‌ها');
+        showError('خطا در جستجوی اتاق‌ها'); // نمایش خطا در هنگام شکست
     }
 }
 
@@ -156,21 +156,21 @@ async function searchRooms() {
  * این تابع برای هر هتل یک کارت ایجاد می‌کند و کمترین قیمت اتاق را محاسبه می‌کند
  * @param {Array} hotels آرایه‌ای از اشیاء هتل
  */
-async function renderHotelCards(hotels) {
+async function renderHotelCards(hotels) { // رندر کارت‌های هتل
     // پاک کردن محتوای قبلی
-    hotelsGrid.innerHTML = '';
+    hotelsGrid.innerHTML = ''; // تخلیه شبکه هتل‌ها
     
     // ایجاد کارت برای هر هتل
-    for (const h of hotels) {
+    for (const h of hotels) { // پیمایش هتل‌ها
         // دریافت لیست اتاق‌ها برای محاسبه کمترین قیمت
-        let minPrice = null;
+        let minPrice = null; // کمترین قیمت اولیه
         try {
-            const res = await fetch(api(`/api/hotels/${h.id}/rooms`));
-            if (res.ok) {
-                const rooms = await res.json();
+            const res = await fetch(api(`/api/hotels/${h.id}/rooms`)); // دریافت اتاق‌های هتل
+            if (res.ok) { // فقط در صورت پاسخ موفق
+                const rooms = await res.json(); // تبدیل به JSON
                 // پیدا کردن کمترین قیمت در بین تمام اتاق‌ها
-                for (const r of rooms) {
-                    if (minPrice === null || r.pricePerNight < minPrice) minPrice = r.pricePerNight;
+                for (const r of rooms) { // پیمایش اتاق‌ها
+                    if (minPrice === null || r.pricePerNight < minPrice) minPrice = r.pricePerNight; // بروزرسانی کمترین قیمت
                 }
             }
         } catch {
@@ -178,11 +178,11 @@ async function renderHotelCards(hotels) {
         }
         
         // ایجاد المان کارت هتل
-        const card = document.createElement('div');
-        card.className = 'card hotel-card';
+        const card = document.createElement('div'); // ایجاد div کارت
+        card.className = 'card hotel-card'; // تعیین کلاس‌های ظاهری
         
         // ساخت HTML کارت شامل نام، شهر، آدرس و کمترین قیمت
-        card.innerHTML = `
+        card.innerHTML = ` // قالب HTML کارت هتل
 			<div class="title">
 				<b>${h.name}</b>
 				<span class="stars">★★★★★</span>
@@ -195,17 +195,17 @@ async function renderHotelCards(hotels) {
 		`;
         
         // اضافه کردن رویداد کلیک به دکمه مشاهده اتاق‌ها
-        card.querySelector('button').addEventListener('click', async () => {
+        card.querySelector('button').addEventListener('click', async () => { // رویداد مشاهده اتاق‌ها
             // انتخاب هتل در لیست کشویی
-            hotelSelect.value = h.id;
+            hotelSelect.value = h.id; // تنظیم گزینه انتخاب‌شده
             // جستجوی اتاق‌های این هتل
-            await searchRooms();
+            await searchRooms(); // اجرای جستجو با هتل انتخابی
             // اسکرول به بخش نتایج
-            window.scrollTo({top: document.querySelector('.results').offsetTop - 60, behavior: 'smooth'});
+            window.scrollTo({top: document.querySelector('.results').offsetTop - 60, behavior: 'smooth'}); // اسکرول نرم به نتایج
         });
         
         // اضافه کردن کارت به صفحه
-        hotelsGrid.appendChild(card);
+        hotelsGrid.appendChild(card); // قرار دادن کارت در DOM
     }
 }
 
@@ -213,59 +213,59 @@ async function renderHotelCards(hotels) {
  * ثبت رزرو جدید
  * این تابع اطلاعات رزرو را به API ارسال می‌کند و رزرو را ثبت می‌کند
  */
-async function reserve() {
+async function reserve() { // ثبت رزرو جدید
     // پاک کردن پیام‌های قبلی
-    message.textContent = '';
+    message.textContent = ''; // حذف پیام موجود
     
     // بررسی اینکه اتاقی انتخاب شده باشد
-    if (!selectedRoomId) {
-        showError('ابتدا یک اتاق انتخاب کنید.');
-        return;
+    if (!selectedRoomId) { // در صورت نبود اتاق انتخاب‌شده
+        showError('ابتدا یک اتاق انتخاب کنید.'); // اطلاع به کاربر
+        return; // توقف اجرا
     }
     
     // بررسی اینکه تمام فیلدهای فرم پر شده باشند
-    if (!guestName.value || !guestEmail.value || !fromDate.value || !toDate.value) {
-        showError('تمام فیلدها را کامل کنید.');
-        return;
+    if (!guestName.value || !guestEmail.value || !fromDate.value || !toDate.value) { // اعتبارسنجی فیلدها
+        showError('تمام فیلدها را کامل کنید.'); // پیام خطا
+        return; // خروج
     }
     
     try {
         // ارسال درخواست POST به API برای ایجاد رزرو
-        const res = await fetch(api('/api/reservations'), {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                roomId: selectedRoomId,
-                guestName: guestName.value,
-                guestEmail: guestEmail.value,
-                startDate: fromDate.value,
-                endDate: toDate.value
+        const res = await fetch(api('/api/reservations'), { // ارسال درخواست
+            method: 'POST', // متد HTTP
+            headers: {'Content-Type': 'application/json'}, // تعیین نوع محتوا
+            body: JSON.stringify({ // ساخت بدنه JSON
+                roomId: selectedRoomId, // شناسه اتاق
+                guestName: guestName.value, // نام مهمان
+                guestEmail: guestEmail.value, // ایمیل مهمان
+                startDate: fromDate.value, // تاریخ شروع
+                endDate: toDate.value // تاریخ پایان
             })
         });
         
         // بررسی موفقیت درخواست
-        if (!res.ok) {
-            const t = await res.text();
-            throw new Error(t);
+        if (!res.ok) { // در صورت پاسخ ناموفق
+            const t = await res.text(); // خواندن متن خطا
+            throw new Error(t); // پرتاب خطا برای catch
         }
         
         // دریافت پاسخ از سرور
-        const data = await res.json();
+        const data = await res.json(); // تبدیل پاسخ به JSON
         
         // نمایش پیام موفقیت با شناسه رزرو
-        showOk(`رزرو با شناسه ${data.id} ثبت شد.`);
+        showOk(`رزرو با شناسه ${data.id} ثبت شد.`); // اطلاع‌رسانی موفقیت
     } catch (e) {
-        showError('خطا در ثبت رزرو');
+        showError('خطا در ثبت رزرو'); // نمایش پیام خطا
     }
 }
 
 // اضافه کردن رویداد کلیک به دکمه جستجو
-searchBtn.addEventListener('click', searchRooms);
+searchBtn.addEventListener('click', searchRooms); // اتصال رویداد جستجو به دکمه
 
 // اضافه کردن رویداد کلیک به دکمه ثبت رزرو
-reserveBtn.addEventListener('click', reserve);
+reserveBtn.addEventListener('click', reserve); // اتصال رویداد ثبت رزرو
 
 // بارگذاری هتل‌ها هنگام لود شدن صفحه
-loadHotels();
+loadHotels(); // بارگذاری اولیه داده‌های هتل
 
 

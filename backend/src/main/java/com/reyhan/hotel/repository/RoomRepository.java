@@ -1,19 +1,19 @@
-package com.reyhan.hotel.repository;
+package com.reyhan.hotel.repository; // پکیج مخازن داده
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDate; // نوع تاریخ برای فیلتر
+import java.util.List; // لیست نتایج پرس‌وجو
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository; // عملیات CRUD عمومی
+import org.springframework.data.jpa.repository.Query; // تعریف کوئری سفارشی
+import org.springframework.data.repository.query.Param; // نشانه‌گذاری پارامترها
 
-import com.reyhan.hotel.entity.Room;
+import com.reyhan.hotel.entity.Room; // موجودیت اتاق
 
 /**
  * رابط دسترسی به داده‌های اتاق
  * این اینترفیس عملیات CRUD و جستجوی اتاق‌های موجود را فراهم می‌کند
  */
-public interface RoomRepository extends JpaRepository<Room, Long> {
+public interface RoomRepository extends JpaRepository<Room, Long> { // مخزن اتاق با کلید Long
 	/**
 	 * پیدا کردن تمام اتاق‌های موجود یک هتل در بازه زمانی مشخص
 	 * این متد اتاق‌هایی را برمی‌گرداند که در بازه زمانی درخواستی رزرو نشده‌اند
@@ -31,10 +31,10 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 			  AND res.startDate <= :endDate 
 			  AND res.endDate >= :startDate
 		)
-	""")
-	List<Room> findAvailableRooms(@Param("hotelId") Long hotelId,
-	                              @Param("startDate") LocalDate startDate,
-	                              @Param("endDate") LocalDate endDate);
+	""") // کوئری JPA برای پیدا کردن اتاق‌های بدون رزرو در بازه
+	List<Room> findAvailableRooms(@Param("hotelId") Long hotelId, // شناسه هتل
+	                              @Param("startDate") LocalDate startDate, // شروع بازه
+	                              @Param("endDate") LocalDate endDate); // پایان بازه
 }
 
 

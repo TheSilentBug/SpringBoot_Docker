@@ -1,18 +1,18 @@
-package com.reyhan.hotel.repository;
+package com.reyhan.hotel.repository; // پکیج مخازن داده
 
-import java.time.LocalDate;
+import java.time.LocalDate; // نوع تاریخ برای بازه رزرو
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository; // عملیات CRUD عمومی
+import org.springframework.data.jpa.repository.Query; // تعریف کوئری سفارشی
+import org.springframework.data.repository.query.Param; // نام‌گذاری پارامترهای کوئری
 
-import com.reyhan.hotel.entity.Reservation;
+import com.reyhan.hotel.entity.Reservation; // موجودیت رزرو
 
 /**
  * رابط دسترسی به داده‌های رزرو
  * این اینترفیس عملیات CRUD و بررسی تداخل رزروها را فراهم می‌کند
  */
-public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+public interface ReservationRepository extends JpaRepository<Reservation, Long> { // مخزن رزرو با کلید Long
 	/**
 	 * شمارش تعداد رزروهای تداخل‌دار برای یک اتاق در بازه زمانی مشخص
 	 * این متد برای بررسی موجود بودن اتاق استفاده می‌شود
@@ -27,10 +27,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 		WHERE res.room.id = :roomId
 		  AND res.startDate <= :endDate
 		  AND res.endDate >= :startDate
-	""")
-	long countOverlapping(@Param("roomId") Long roomId,
-	                      @Param("startDate") LocalDate startDate,
-	                      @Param("endDate") LocalDate endDate);
+	""") // کوئری برای بررسی تداخل زمانی
+	long countOverlapping(@Param("roomId") Long roomId, // شناسه اتاق
+	                      @Param("startDate") LocalDate startDate, // شروع بازه
+	                      @Param("endDate") LocalDate endDate); // پایان بازه
 }
 
 
