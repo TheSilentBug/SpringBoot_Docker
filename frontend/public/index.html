@@ -1,21 +1,28 @@
 <!DOCTYPE html>
+<!-- صفحه اصلی سامانه رزرواسیون هتل -->
 <html dir="rtl" lang="fa">
 <head>
+    <!-- تنظیمات متا و کدگذاری -->
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>رزرو هتل - سامانه رزرواسیون</title>
+    <!-- لینک به فایل CSS برای استایل‌دهی -->
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
+<!-- نوار بالای صفحه (Navigation Bar) -->
 <nav class="topnav">
     <div class="container nav-inner">
+        <!-- لوگو و نام سایت -->
         <div class="brand">رزرو هتل</div>
+        <!-- منوی اصلی سایت -->
         <ul class="nav-links">
             <li><a href="#">هتل</a></li>
             <li><a href="#">پرواز</a></li>
             <li><a href="#">قطار</a></li>
             <li><a href="#">اتوبوس</a></li>
         </ul>
+        <!-- دکمه‌های ورود و ثبت‌نام -->
         <div class="nav-actions">
             <button class="btn ghost">ورود</button>
             <button class="btn primary">ثبت‌نام</button>
@@ -23,56 +30,77 @@
     </div>
 </nav>
 
+<!-- بخش اصلی جستجو (Hero Section) -->
 <section class="hero">
     <div class="container">
+        <!-- عنوان اصلی صفحه -->
         <h1>جستجو و رزرو هتل</h1>
+        <!-- توضیحات -->
         <p class="muted">مقصد را انتخاب کنید، تاریخ‌ها را وارد کنید و بهترین اتاق‌ها را ببینید.</p>
+        <!-- فرم جستجو -->
         <div class="searchbar">
+            <!-- فیلد انتخاب هتل -->
             <div class="field">
                 <label>هتل</label>
                 <select id="hotelSelect"></select>
             </div>
+            <!-- فیلد تاریخ شروع -->
             <div class="field">
                 <label>از تاریخ</label>
                 <input id="fromDate" type="date">
             </div>
+            <!-- فیلد تاریخ پایان -->
             <div class="field">
                 <label>تا تاریخ</label>
                 <input id="toDate" type="date">
             </div>
+            <!-- دکمه جستجو -->
             <button class="btn primary xl" id="searchBtn">جستجو</button>
         </div>
+        <!-- المان نمایش پیام‌ها (خطا یا موفقیت) -->
         <div id="message"></div>
     </div>
 </section>
 
+<!-- محتوای اصلی صفحه -->
 <div class="container page">
+    <!-- نوار کناری فیلترها -->
     <aside class="filters">
         <h3>فیلترها</h3>
+        <!-- چک‌باکس فیلتر سوئیت -->
         <label class="checkbox">
             <input id="filterSuite" type="checkbox"> فقط سوئیت‌ها
         </label>
+        <!-- چک‌باکس فیلتر ظرفیت -->
         <label class="checkbox">
             <input id="filterCapacity3" type="checkbox"> ظرفیت ۳ نفر به بالا
         </label>
+        <!-- توضیح درباره فیلترها -->
         <p class="hint muted">فیلترها صرفاً نمایشی‌اند؛ لیست اتاق‌ها از API بک‌اند می‌آید.</p>
     </aside>
 
+    <!-- بخش اصلی محتوا -->
     <main class="content">
+        <!-- بخش نمایش هتل‌های پیشنهادی -->
         <section>
             <h2>هتل‌های پیشنهادی</h2>
             <div class="grid" id="hotelsGrid"></div>
         </section>
 
+        <!-- بخش نمایش نتایج جستجو (اتاق‌های موجود) -->
         <section class="results">
             <h2>اتاق‌های موجود</h2>
             <div class="grid grid-rooms" id="roomsGrid"></div>
         </section>
 
+        <!-- بخش فرم رزرواسیون -->
         <section class="reservation">
             <h2>ثبت رزرو</h2>
+            <!-- فرم رزرو (در ابتدا مخفی است) -->
             <div class="card hidden" id="reservationForm">
+                <!-- نمایش شماره اتاق انتخاب شده -->
                 <p>اتاق انتخاب شده: <b id="selectedRoom"></b></p>
+                <!-- فیلدهای فرم رزرو -->
                 <div class="form-row">
                     <input id="guestName" placeholder="نام و نام خانوادگی" type="text">
                     <input id="guestEmail" placeholder="ایمیل" type="email">
@@ -83,13 +111,17 @@
     </main>
 </div>
 
+<!-- فوتر صفحه -->
 <footer class="site-footer">
     <div class="container">
         <p>© 2025 سامانه رزرواسیون</p>
     </div>
 </footer>
 
+<!-- بارگذاری فایل‌های JavaScript -->
+<!-- فایل تنظیمات (آدرس بک‌اند) -->
 <script src="config.js"></script>
+<!-- فایل اصلی منطق برنامه -->
 <script src="app.js"></script>
 </body>
 </html>

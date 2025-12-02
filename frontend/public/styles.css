@@ -1,158 +1,185 @@
+/* تعریف متغیرهای CSS برای رنگ‌ها و استایل‌های مشترک */
 :root {
-    --bg: #0f172a;
-    --fg: #e2e8f0;
-    --muted: #94a3b8;
-    --primary: #0ea5e9;
-    --card: #0b1220;
-    --accent: #10b981;
-    --border: #1f2937;
-    --shadow: 0 8px 24px rgba(0, 0, 0, .3);
+    --bg: #0f172a; /* رنگ پس‌زمینه اصلی */
+    --fg: #e2e8f0; /* رنگ متن اصلی */
+    --muted: #94a3b8; /* رنگ متن کم‌رنگ */
+    --primary: #0ea5e9; /* رنگ اصلی (آبی) */
+    --card: #0b1220; /* رنگ پس‌زمینه کارت‌ها */
+    --accent: #10b981; /* رنگ تأکیدی (سبز) */
+    --border: #1f2937; /* رنگ حاشیه */
+    --shadow: 0 8px 24px rgba(0, 0, 0, .3); /* سایه پیش‌فرض */
 }
 
+/* تنظیمات کلی برای تمام المان‌ها */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* محاسبه اندازه با در نظر گیری padding و border */
 }
 
+/* تنظیمات پایه برای HTML و Body */
 html, body {
     margin: 0;
     padding: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: Vazirmatn, Segoe UI, Tahoma, Arial, sans-serif;
+    background: var(--bg); /* استفاده از رنگ پس‌زمینه تعریف شده */
+    color: var(--fg); /* استفاده از رنگ متن تعریف شده */
+    font-family: Vazirmatn, Segoe UI, Tahoma, Arial, sans-serif; /* فونت فارسی و انگلیسی */
 }
 
+/* استایل‌های مشترک برای input، select و button */
 input, select, button {
     margin-top: 6px;
     padding: 10px 12px;
-    border-radius: 8px;
+    border-radius: 8px; /* گوشه‌های گرد */
     border: 1px solid #334155;
     background: #0b1220;
     color: var(--fg);
 }
 
+/* استایل‌های مخصوص دکمه‌ها */
 button {
-    cursor: pointer;
+    cursor: pointer; /* تغییر نشانگر ماوس به دست */
     border-color: #0ea5e9;
     background: #0b1f2e;
-    transition: background .15s ease, transform .05s ease;
+    transition: background .15s ease, transform .05s ease; /* انیمیشن نرم */
 }
 
+/* استایل دکمه هنگام hover (قرار گرفتن ماوس روی آن) */
 button:hover {
     background: #0a2a3f;
 }
 
+/* استایل دکمه هنگام کلیک */
 button:active {
-    transform: translateY(1px);
+    transform: translateY(1px); /* حرکت کوچک به پایین برای افکت کلیک */
 }
 
+/* کلاس برای مخفی کردن المان‌ها */
 .hidden {
     display: none;
 }
 
+/* استایل المان نمایش پیام */
 #message {
     margin-top: 12px;
 }
 
+/* رنگ سبز برای پیام‌های موفقیت */
 .ok {
     color: var(--accent);
 }
 
+/* رنگ قرمز برای پیام‌های خطا */
 .err {
     color: #ef4444;
 }
 
-/* Layout */
+/* استایل‌های Layout و چیدمان صفحه */
+/* کانتینر اصلی با عرض حداکثر 1200 پیکسل و وسط‌چین */
 .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
+    margin: 0 auto; /* وسط‌چین کردن */
+    padding: 0 16px; /* فاصله از کناره‌ها */
 }
 
+/* استایل نوار بالای صفحه (Navigation Bar) */
 .topnav {
     background: #0b1220;
     border-bottom: 1px solid var(--border);
-    position: sticky;
+    position: sticky; /* چسبیدن به بالای صفحه هنگام اسکرول */
     top: 0;
-    z-index: 10;
+    z-index: 10; /* قرار گرفتن در بالای سایر المان‌ها */
 }
 
+/* استایل محتوای داخلی نوار */
 .nav-inner {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /* تراز عمودی وسط */
+    justify-content: space-between; /* فاصله بین المان‌ها */
     height: 64px;
 }
 
+/* استایل لوگو/نام برند */
 .brand {
     font-weight: 800;
     letter-spacing: .5px;
 }
 
+/* استایل منوی لینک‌ها */
 .nav-links {
     display: flex;
-    list-style: none;
+    list-style: none; /* حذف نشانگر لیست */
     gap: 16px;
     margin: 0;
     padding: 0;
 }
 
+/* استایل لینک‌های منو */
 .nav-links a {
     color: var(--fg);
-    text-decoration: none;
+    text-decoration: none; /* حذف خط زیر لینک */
 }
 
+/* استایل دکمه‌های ورود و ثبت‌نام */
 .nav-actions {
     display: flex;
     gap: 8px;
 }
 
+/* استایل پایه دکمه‌ها */
 .btn {
     border: 1px solid var(--border);
     padding: 8px 14px;
     border-radius: 10px;
 }
 
+/* استایل دکمه اصلی (آبی) */
 .btn.primary {
     background: #042c3a;
     border-color: var(--primary);
     color: #a4e8ff;
 }
 
+/* استایل دکمه موفقیت (سبز) */
 .btn.success {
     background: #062b22;
     border-color: #16a34a;
     color: #86efac;
 }
 
+/* استایل دکمه شفاف (بدون پس‌زمینه) */
 .btn.ghost {
     background: transparent;
 }
 
+/* استایل دکمه بزرگ */
 .btn.xl {
     padding: 12px 18px;
     font-size: 16px;
 }
 
+/* استایل بخش Hero (بخش جستجو در بالای صفحه) */
 .hero {
     background: radial-gradient(60% 80% at 50% 0%, rgba(14, 165, 233, .18), transparent 60%), #081423;
     border-bottom: 1px solid var(--border);
     padding: 36px 0 24px;
 }
 
+/* استایل عنوان اصلی */
 .hero h1 {
     margin: 0 0 6px;
 }
 
+/* کلاس برای متن‌های کم‌رنگ */
 .muted {
     color: var(--muted);
 }
 
+/* استایل نوار جستجو */
 .searchbar {
     margin-top: 16px;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
+    display: grid; /* استفاده از Grid Layout */
+    grid-template-columns: 2fr 1fr 1fr auto; /* تقسیم فضا: هتل 2 واحد، تاریخ‌ها هر کدام 1 واحد، دکمه auto */
     gap: 10px;
-    align-items: end;
+    align-items: end; /* تراز المان‌ها از پایین */
     background: #0a1426;
     border: 1px solid var(--border);
     border-radius: 14px;
@@ -160,30 +187,35 @@ button:active {
     box-shadow: var(--shadow);
 }
 
+/* استایل برچسب فیلدهای جستجو */
 .searchbar .field label {
     font-size: 12px;
     color: var(--muted);
 }
 
+/* استایل input و select در نوار جستجو */
 .searchbar select, .searchbar input {
-    width: 100%;
+    width: 100%; /* پر کردن تمام عرض فیلد */
 }
 
+/* استایل صفحه اصلی (با sidebar و محتوا) */
 .page {
     padding: 24px 0 40px;
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 260px 1fr; /* sidebar 260px و محتوا بقیه فضا */
     gap: 20px;
 }
 
+/* استایل نوار کناری فیلترها */
 .filters {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
-    height: fit-content;
+    height: fit-content; /* ارتفاع بر اساس محتوا */
 }
 
+/* استایل چک‌باکس‌ها */
 .checkbox {
     display: flex;
     align-items: center;
@@ -191,24 +223,29 @@ button:active {
     margin: 8px 0;
 }
 
+/* استایل متن راهنما */
 .hint {
     font-size: 12px;
 }
 
+/* استایل عنوان‌های بخش محتوا */
 .content h2 {
     margin-top: 0;
 }
 
+/* استایل Grid برای نمایش کارت‌ها */
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 ستون با عرض مساوی */
     gap: 16px;
 }
 
+/* استایل Grid مخصوص اتاق‌ها (2 ستون) */
 .grid-rooms {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 ستون با عرض مساوی */
 }
 
+/* استایل پایه کارت‌ها */
 .card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -217,35 +254,40 @@ button:active {
     box-shadow: var(--shadow);
 }
 
+/* استایل عنوان کارت هتل */
 .hotel-card .title {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* فاصله بین نام و ستاره‌ها */
     align-items: baseline;
     gap: 8px;
 }
 
+/* استایل ستاره‌های رتبه‌بندی */
 .stars {
-    color: #fbbf24;
+    color: #fbbf24; /* رنگ طلایی */
     font-size: 14px;
 }
 
+/* استایل برچسب نوع اتاق (pill) */
 .pill {
     display: inline-block;
     background: #0a2a3f;
     border: 1px solid #0ea5e9;
     color: #a4e8ff;
     padding: 2px 8px;
-    border-radius: 999px;
+    border-radius: 999px; /* شکل گرد کامل */
     font-size: 12px;
 }
 
+/* استایل نمایش قیمت */
 .price {
-    font-weight: 700;
+    font-weight: 700; /* متن پررنگ */
 }
 
+/* استایل بخش دکمه‌های کارت */
 .actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* تراز به راست */
 }
 
 

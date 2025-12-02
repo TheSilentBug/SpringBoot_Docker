@@ -1,55 +1,57 @@
+# فایل Docker Compose برای راه‌اندازی تمام سرویس‌های پروژه
 version: "3.9"
 services:
+  # سرویس دیتابیس MySQL
   db:
     image: mysql:8.4
     container_name: hotel_mysql
-    restart: unless-stopped
+    restart: unless-stopped # راه‌اندازی مجدد خودکار مگر اینکه به صورت دستی متوقف شود
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: hotel_db
-      MYSQL_USER: hotel
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password # رمز عبور کاربر root
+      MYSQL_DATABASE: hotel_db # نام دیتابیس
+      MYSQL_USER: hotel # نام کاربری دیتابیس
+      MYSQL_PASSWORD: password # رمز عبور کاربر دیتابیس
     ports:
-      - "3306:3306"
+      - "3306:3306" # در دسترس قرار دادن پورت 3306 برای اتصال خارجی
     volumes:
-      - db_data:/var/lib/mysql
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      - db_data:/var/lib/mysql # ذخیره داده‌های دیتابیس در volume
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # پشتیبانی از کاراکترهای فارسی
     healthcheck:
-      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u$$MYSQL_USER -p$$MYSQL_PASSWORD || exit 1" ]
-      interval: 5s
+      # بررسی سلامت دیتابیس قبل از راه‌اندازی سرویس‌های دیگر
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u$MYSQL_USER -p$MYSQL_PASSWORD || exit 1" ]
+      interval: 5s # بررسی هر 5 ثانیه
       timeout: 5s
-      retries: 20
+      retries: 20 # تعداد تلاش‌ها
 
+  # سرویس بک‌اند Spring Boot
   backend:
-    build: ./backend
+    build: ./backend # ساخت image از Dockerfile در پوشه backend
     container_name: hotel_backend
     depends_on:
       db:
-        condition: service_healthy
+        condition: service_healthy # منتظر ماندن تا دیتابیس سالم شود
     environment:
-      DB_HOST: db
+      DB_HOST: db # آدرس دیتابیس (نام سرویس در docker-compose)
       DB_PORT: 3306
       DB_NAME: hotel_db
       DB_USER: hotel
       DB_PASSWORD: password
       PORT: 8080
     ports:
-      - "8080:8080"
+      - "8080:8080" # در دسترس قرار دادن پورت 8080
 
+  # سرویس فرانت‌اند (Nginx)
   frontend:
-    build: ./frontend
+    build: ./frontend # ساخت image از Dockerfile در پوشه frontend
     container_name: hotel_frontend
     depends_on:
-      - backend
+      - backend # منتظر ماندن تا بک‌اند راه‌اندازی شود
     ports:
-      - "8081:80"
+      - "8081:80" # در دسترس قرار دادن پورت 8081 برای frontend
     volumes:
-      # Optionally override API base url without rebuilding:
-      # - ./frontend/public/config.docker.js:/usr/share/nginx/html/config.js:ro
-      # Default uses localhost for non-docker runs; within compose, we mount a config too:
+      # mount کردن فایل config.js برای تغییر آدرس بک‌اند بدون rebuild
       - ./frontend/public/config.js:/usr/share/nginx/html/config.js:ro
 
+# تعریف volume برای ذخیره داده‌های دیتابیس
 volumes:
   db_data:
-
-
