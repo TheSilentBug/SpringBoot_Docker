@@ -81,30 +81,66 @@
 
     <!-- بخش اصلی محتوا -->
     <main class="content">
-        <!-- بخش نمایش هتل‌های پیشنهادی -->
-        <section>
-            <h2>هتل‌های پیشنهادی</h2>
-            <div class="grid" id="hotelsGrid"></div>
+        <!-- بخش نمایش هتل‌های پیشنهادی که از بک‌اند لود می‌شوند -->
+        <section> <!-- سکشن هتل‌های پیشنهادی -->
+            <h2>هتل‌های پیشنهادی</h2> <!-- عنوان بخش هتل‌های پیشنهادی -->
+            <div class="grid" id="hotelsGrid"></div> <!-- گرید کارت‌های هتل که با JS پر می‌شود -->
+        </section>
+
+        <!-- جدول کامل هتل‌ها بر اساس داده‌های بک‌اند -->
+        <section class="hotel-list"> <!-- سکشن فهرست کامل هتل‌ها -->
+            <h2>فهرست هتل‌های ثبت‌شده</h2> <!-- عنوان جدول هتل‌ها -->
+            <div class="card"> <!-- کارت حاوی جدول -->
+                <div class="table-wrapper"> <!-- ظرف اسکرول‌پذیر برای جدول -->
+                    <table class="data-table"> <!-- جدول نمایش مشخصات هتل‌ها -->
+                        <thead> <!-- هدر جدول -->
+                            <tr> <!-- ردیف عنوان ستون‌ها -->
+                                <th>شناسه</th> <!-- ستون شناسه هتل -->
+                                <th>نام هتل</th> <!-- ستون نام هتل -->
+                                <th>شهر</th> <!-- ستون شهر هتل -->
+                                <th>آدرس</th> <!-- ستون آدرس هتل -->
+                            </tr>
+                        </thead>
+                        <tbody id="hotelsTableBody"> <!-- بدنه جدول که با JS از /api/hotels پر می‌شود -->
+                            <!-- ردیف‌های هتل از طریق JS تکمیل می‌شوند -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </section>
 
         <!-- بخش نمایش نتایج جستجو (اتاق‌های موجود) -->
-        <section class="results">
-            <h2>اتاق‌های موجود</h2>
-            <div class="grid grid-rooms" id="roomsGrid"></div>
+        <section class="results"> <!-- سکشن نتایج جستجوی اتاق‌ها -->
+            <h2>اتاق‌های موجود</h2> <!-- عنوان بخش اتاق‌های موجود -->
+            <div class="grid grid-rooms" id="roomsGrid"></div> <!-- گرید کارت‌های اتاق که با جستجو پر می‌شود -->
         </section>
 
         <!-- بخش فرم رزرواسیون -->
-        <section class="reservation">
-            <h2>ثبت رزرو</h2>
+        <section class="reservation"> <!-- سکشن فرم رزرو -->
+            <h2>ثبت رزرو</h2> <!-- عنوان فرم رزرو -->
             <!-- فرم رزرو (در ابتدا مخفی است) -->
-            <div class="card hidden" id="reservationForm">
+            <div class="card hidden" id="reservationForm"> <!-- کارت فرم که پس از انتخاب اتاق نمایش داده می‌شود -->
                 <!-- نمایش شماره اتاق انتخاب شده -->
-                <p>اتاق انتخاب شده: <b id="selectedRoom"></b></p>
+                <p>اتاق انتخاب شده: <b id="selectedRoom"></b></p> <!-- نمایش شماره اتاق انتخاب‌شده -->
                 <!-- فیلدهای فرم رزرو -->
-                <div class="form-row">
-                    <input id="guestName" placeholder="نام و نام خانوادگی" type="text">
-                    <input id="guestEmail" placeholder="ایمیل" type="email">
-                    <button class="btn success" id="reserveBtn">ثبت رزرو</button>
+                <div class="form-row"> <!-- ردیف فیلدهای نام، ایمیل و دکمه -->
+                    <input id="guestName" placeholder="نام و نام خانوادگی" type="text"> <!-- ورودی نام مهمان -->
+                    <input id="guestEmail" placeholder="ایمیل" type="email"> <!-- ورودی ایمیل مهمان -->
+                    <button class="btn success" id="reserveBtn">ثبت رزرو</button> <!-- دکمه ارسال رزرو -->
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش مشاهده رزرو بر اساس شناسه -->
+        <section class="reservation-lookup"> <!-- سکشن پیگیری رزرو ثبت‌شده -->
+            <h2>پیگیری رزرو ثبت‌شده</h2> <!-- عنوان بخش پیگیری رزرو -->
+            <div class="card"> <!-- کارت فرم پیگیری -->
+                <div class="form-row"> <!-- ردیف ورودی شناسه و دکمه -->
+                    <input id="reservationIdInput" placeholder="شناسه رزرو را وارد کنید" type="number" min="1"> <!-- ورودی شناسه رزرو -->
+                    <button class="btn primary" id="reservationLookupBtn">نمایش رزرو</button> <!-- دکمه فراخوانی API رزرو -->
+                </div>
+                <div class="reservation-details" id="reservationDetails"> <!-- ناحیه نمایش جزئیات رزرو -->
+                    <!-- اطلاعات رزرو در اینجا نمایش داده می‌شود -->
                 </div>
             </div>
         </section>

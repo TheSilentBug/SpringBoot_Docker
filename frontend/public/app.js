@@ -14,6 +14,10 @@ const reserveBtn = $('#reserveBtn'); // دکمه ثبت رزرو
 const message = $('#message'); // المان نمایش پیام‌ها
 const hotelsGrid = $('#hotelsGrid'); // المان نمایش کارت‌های هتل‌ها
 const roomsGrid = $('#roomsGrid'); // المان نمایش کارت‌های اتاق‌ها
+const hotelsTableBody = $('#hotelsTableBody'); // بدنه جدول لیست هتل‌ها
+const reservationIdInput = $('#reservationIdInput'); // ورودی شناسه رزرو برای جستجو
+const reservationLookupBtn = $('#reservationLookupBtn'); // دکمه نمایش رزرو
+const reservationDetails = $('#reservationDetails'); // ناحیه نمایش اطلاعات رزرو
 
 // متغیر برای نگهداری شناسه اتاق انتخاب شده
 let selectedRoomId = null; // نگهداری شناسه اتاق انتخاب شده
@@ -41,9 +45,13 @@ async function loadHotels() { // دریافت لیست هتل‌ها از سرو
             opt.textContent = `${h.name} - ${h.city}`; // نمایش نام و شهر
             hotelSelect.appendChild(opt); // افزودن گزینه به لیست
         }
+        if (data.length) {
+            hotelSelect.value = data[0].id; // انتخاب اولین گزینه به صورت پیش‌فرض
+        }
         
-        // نمایش کارت‌های هتل‌ها در بخش پیشنهادی
+        // نمایش هتل‌ها در کارت‌ها و جدول مجزا
         await renderHotelCards(data); // فراخوانی رندر کارت‌ها
+        renderHotelsTable(data); // نمایش داده‌ها در جدول
     } catch (e) {
         showError('خطا در دریافت لیست هتل‌ها'); // نمایش پیام خطا
     }
@@ -111,6 +119,33 @@ function renderRooms(rooms) { // رندر کارت‌های اتاق
         
         // اضافه کردن کارت به صفحه
         roomsGrid.appendChild(card); // رندر کارت در شبکه
+    }
+}
+
+/**
+ * تکمیل جدول هتل‌ها با داده‌های دریافتی بک‌اند
+ * @param {Array} hotels آرایه هتل‌ها
+ */
+function renderHotelsTable(hotels) { // رندر جدول هتل‌ها
+    if (!hotelsTableBody) return; // اگر جدول در صفحه نباشد، کاری نکن
+    hotelsTableBody.innerHTML = ''; // خالی کردن جدول
+    
+    if (!hotels.length) { // اگر داده‌ای وجود ندارد
+        const row = document.createElement('tr'); // ساخت ردیف پیام
+        row.innerHTML = `<td colspan="4" class="muted">هتلی ثبت نشده است.</td>`; // پیام اطلاع‌رسانی
+        hotelsTableBody.appendChild(row); // افزودن ردیف به جدول
+        return;
+    }
+    
+    for (const hotel of hotels) { // پیمایش هتل‌ها
+        const row = document.createElement('tr'); // ایجاد ردیف جدید
+        row.innerHTML = `
+            <td>${hotel.id}</td>
+            <td>${hotel.name}</td>
+            <td>${hotel.city || '—'}</td>
+            <td>${hotel.address || '—'}</td>
+        `;
+        hotelsTableBody.appendChild(row); // افزودن ردیف به جدول
     }
 }
 
@@ -259,11 +294,66 @@ async function reserve() { // ثبت رزرو جدید
     }
 }
 
+/**
+ * دریافت اطلاعات یک رزرو بر اساس شناسه وارد شده توسط کاربر
+ */
+async function lookupReservation() { // جستجوی رزرو واحد
+    if (!reservationIdInput || !reservationDetails) return; // اگر عناصر در صفحه نیستند، کاری نکن
+    reservationDetails.textContent = ''; // پاک کردن محتوای قبلی
+    reservationDetails.classList.remove('ok', 'err'); // حذف حالت‌های قبلی
+    
+    const reservationId = Number(reservationIdInput.value); // خواندن شناسه
+    if (!reservationId) { // اعتبارسنجی مقدار
+        reservationDetails.textContent = 'شناسه رزرو را به صورت عددی وارد کنید.'; // پیام راهنما
+        reservationDetails.classList.add('err'); // رنگ قرمز برای خطا
+        return;
+    }
+    
+    try {
+        const res = await fetch(api(`/api/reservations/${reservationId}`)); // درخواست به بک‌اند
+        if (!res.ok) throw new Error(); // در صورت خطا به catch می‌رود
+        const data = await res.json(); // دریافت اطلاعات رزرو
+        
+        reservationDetails.classList.add('ok'); // نمایش سبز برای موفقیت
+        reservationDetails.classList.remove('err'); // حذف حالت خطا
+        reservationDetails.innerHTML = ` // نمایش جزئیات رزرو
+            <div>شناسه رزرو: <span class="highlight">${data.id}</span></div>
+            <div>نام مهمان: ${data.guestName}</div>
+            <div>ایمیل: ${data.guestEmail}</div>
+            <div>شماره اتاق: ${data.room?.number || 'نامشخص'}</div>
+            <div>بازه اقامت: ${formatDate(data.startDate)} تا ${formatDate(data.endDate)}</div>
+        `;
+    } catch (err) {
+        reservationDetails.textContent = 'رزرو موردنظر یافت نشد یا خطایی رخ داد.'; // پیام خطا
+        reservationDetails.classList.remove('ok'); // حذف حالت موفق
+        reservationDetails.classList.add('err'); // نمایش قرمز
+    }
+}
+
+/**
+ * تبدیل رشته تاریخ ISO به قالب خوانا برای کاربر
+ * @param {string} value تاریخ ورودی
+ * @returns {string} تاریخ تبدیل‌شده
+ */
+function formatDate(value) { // فرمت کردن تاریخ برای نمایش فارسی
+    if (!value) return '—'; // در صورت نبود تاریخ
+    try {
+        return new Date(value).toLocaleDateString('fa-IR', {year: 'numeric', month: 'short', day: '2-digit'}); // تبدیل به تاریخ شمسی/محلی
+    } catch {
+        return value; // در صورت خطا همان مقدار اولیه برمی‌گردد
+    }
+}
+
 // اضافه کردن رویداد کلیک به دکمه جستجو
 searchBtn.addEventListener('click', searchRooms); // اتصال رویداد جستجو به دکمه
 
 // اضافه کردن رویداد کلیک به دکمه ثبت رزرو
 reserveBtn.addEventListener('click', reserve); // اتصال رویداد ثبت رزرو
+
+// رویداد پیگیری رزرو
+if (reservationLookupBtn) {
+    reservationLookupBtn.addEventListener('click', lookupReservation); // اتصال رویداد نمایش رزرو
+}
 
 // بارگذاری هتل‌ها هنگام لود شدن صفحه
 loadHotels(); // بارگذاری اولیه داده‌های هتل

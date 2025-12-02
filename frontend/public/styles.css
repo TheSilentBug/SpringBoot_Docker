@@ -290,4 +290,57 @@ button:active {
     justify-content: flex-end; /* تراز به راست */
 }
 
+/* استایل جدول نمایش هتل‌ها */
+.table-wrapper {
+    overflow-x: auto; /* امکان اسکرول افقی در موبایل */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse; /* حذف فاصله بین سلول‌ها */
+    font-size: 14px;
+}
+
+.data-table th, .data-table td {
+    text-align: right;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.data-table th {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* استایل چیدمان سطرهای فرم */
+.form-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; /* جمع شدن در موبایل */
+    align-items: center;
+}
+
+.form-row input {
+    flex: 1;
+    min-width: 220px;
+}
+
+/* استایل بخش نمایش جزییات رزرو */
+.reservation-details {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(148, 163, 184, .2);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.reservation-details .highlight {
+    color: var(--accent);
+    font-weight: 600;
+}
+
 
