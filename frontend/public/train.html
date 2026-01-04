@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>رزرو قطار | قطارهای داخلی و بین‌المللی | هتل مارکوپولو</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="container nav-container">
+        <a class="logo" href="index.html">
+            <i class="fas fa-train"></i>
+            هتل مارکوپولو
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="index.html"><i class="fas fa-bed"></i> هتل</a></li>
+            <li><a href="flight.html"><i class="fas fa-plane"></i> پرواز</a></li>
+            <li><a class="active" href="train.html"><i class="fas fa-train"></i> قطار</a></li>
+            <li><a href="bus.html"><i class="fas fa-bus"></i> اتوبوس</a></li>
+            <li><a href="tour.html"><i class="fas fa-umbrella-beach"></i> تور</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="window.location.href='login.html'">
+                <i class="fas fa-sign-in-alt"></i> ورود
+            </button>
+            <button class="btn btn-primary" onclick="window.location.href='register.html'">
+                <i class="fas fa-user-plus"></i> ثبت‌نام
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section برای قطار -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>سفر راحت و ایمن با قطارهای ایران</h1>
+            <p>رزرو آنلاین بلیط قطارهای داخلی و بین‌المللی با بهترین قیمت و امکانات</p>
+
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="tab active" data-tab="domestic">
+                        <i class="fas fa-train"></i> قطار داخلی
+                    </button>
+                    <button class="tab" data-tab="international">
+                        <i class="fas fa-globe"></i> قطار بین‌المللی
+                    </button>
+                    <button class="tab" data-tab="suburban">
+                        <i class="fas fa-subway"></i> قطار حومه
+                    </button>
+                </div>
+
+                <div class="search-grid">
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input id="origin" placeholder="شهر مبدأ" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-flag-checkered"></i>
+                        <input id="destination" placeholder="شهر مقصد" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input id="travel-date" type="date">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-user-friends"></i>
+                        <select id="passengers">
+                            <option value="1">1 مسافر</option>
+                            <option selected value="2">2 مسافر</option>
+                            <option value="3">3 مسافر</option>
+                            <option value="4">4 مسافر</option>
+                            <option value="5">5+ مسافر</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- کلاس‌های قطار -->
+                <div style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <div class="class-option" data-class="economy">
+                        <i class="fas fa-chair"></i>
+                        <span>اکونومی</span>
+                    </div>
+                    <div class="class-option active" data-class="business">
+                        <i class="fas fa-briefcase"></i>
+                        <span>بیزینس</span>
+                    </div>
+                    <div class="class-option" data-class="first">
+                        <i class="fas fa-gem"></i>
+                        <span>درجه یک</span>
+                    </div>
+                    <div class="class-option" data-class="sleeper">
+                        <i class="fas fa-bed"></i>
+                        <span>کوپه خواب</span>
+                    </div>
+                </div>
+
+                <button class="search-btn" id="search-trains">
+                    <i class="fas fa-search"></i>
+                    جستجوی قطار
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>چرا سفر با قطار؟</h2>
+            <p>مزایای منحصربفرد سفر ریلی</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>ایمنی بالا</h3>
+                <p>کمترین میزان حوادث در میان وسایل نقلیه عمومی</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>سفر سبز</h3>
+                <p>کمترین آلودگی زیست محیطی</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>اینترنت رایگان</h3>
+                <p>دسترسی به اینترنت پرسرعت در طول مسیر</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>پذیرایی مجلل</h3>
+                <p>سرو غذا و نوشیدنی در تمام کلاس‌های سفر</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Routes Section -->
+<section class="popular-routes">
+    <div class="container">
+        <div class="section-title">
+            <h2>مسیرهای پرطرفدار</h2>
+            <p>محبوب‌ترین مسیرهای قطار در ایران</p>
+        </div>
+
+        <div class="routes-grid">
+            <div class="route-card">
+                <h3>تهران - مشهد</h3>
+                <div class="route-details">
+                    <div>
+                        <div>تهران</div>
+                        <small>۱۷:۰۰</small>
+                    </div>
+                    <div class="time-badge">۱۲ ساعت</div>
+                    <div>
+                        <div>مشهد</div>
+                        <small>۰۵:۰۰</small>
+                    </div>
+                </div>
+                <div class="route-stops">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>توقف در: سمنان، شاهرود، نیشابور</span>
+                </div>
+                <div class="train-features">
+                    <span>اینترنت رایگان</span>
+                    <span>پذیرایی</span>
+                    <span>کوپه خواب</span>
+                </div>
+                <div class="route-price">از ۳۵۰,۰۰۰ تومان</div>
+            </div>
+
+            <div class="route-card">
+                <h3>تهران - اصفهان</h3>
+                <div class="route-details">
+                    <div>
+                        <div>تهران</div>
+                        <small>۰۸:۳۰</small>
+                    </div>
+                    <div class="time-badge">۷ ساعت</div>
+                    <div>
+                        <div>اصفهان</div>
+                        <small>۱۵:۳۰</small>
+                    </div>
+                </div>
+                <div class="route-stops">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>توقف در: قم، کاشان</span>
+                </div>
+                <div class="train-features">
+                    <span>واتر جک</span>
+                    <span>سینمای متحرک</span>
+                    <span>کافی‌شاپ</span>
+                </div>
+                <div class="route-price">از ۲۲۰,۰۰۰ تومان</div>
+            </div>
+
+            <div class="route-card">
+                <h3>تهران - شیراز</h3>
+                <div class="route-details">
+                    <div>
+                        <div>تهران</div>
+                        <small>۱۴:۰۰</small>
+                    </div>
+                    <div class="time-badge">۱۴ ساعت</div>
+                    <div>
+                        <div>شیراز</div>
+                        <small>۰۴:۰۰</small>
+                    </div>
+                </div>
+                <div class="route-stops">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>توقف در: اراک، بروجرد، خرم‌آباد</span>
+                </div>
+                <div class="train-features">
+                    <span>اتاق بازی کودکان</span>
+                    <span>رستوران لوکس</span>
+                </div>
+                <div class="route-price">از ۴۲۰,۰۰۰ تومان</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Schedule Section -->
+<section class="schedule-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>جدول زمان‌بندی قطارها</h2>
+            <p>برنامه حرکت قطارهای بین شهری</p>
+        </div>
+
+        <div class="schedule-table-container">
+            <table class="schedule-table">
+                <thead>
+                <tr>
+                    <th>نام قطار</th>
+                    <th>مبدأ</th>
+                    <th>مقصد</th>
+                    <th>ساعت حرکت</th>
+                    <th>ساعت رسیدن</th>
+                    <th>مدت سفر</th>
+                    <th>قیمت</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="train-name">شهید قاسم سلیمانی</div>
+                        <div class="train-type">کوپه خواب</div>
+                    </td>
+                    <td>تهران</td>
+                    <td>مشهد</td>
+                    <td>۱۷:۰۰</td>
+                    <td>۰۵:۰۰</td>
+                    <td>۱۲ ساعت</td>
+                    <td>۳۵۰,۰۰۰ تومان</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="train-name">امام رضا</div>
+                        <div class="train-type">درجه یک</div>
+                    </td>
+                    <td>تهران</td>
+                    <td>مشهد</td>
+                    <td>۲۱:۳۰</td>
+                    <td>۰۹:۳۰</td>
+                    <td>۱۲ ساعت</td>
+                    <td>۳۸۰,۰۰۰ تومان</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="train-name">چمران</div>
+                        <div class="train-type">بیزینس</div>
+                    </td>
+                    <td>تهران</td>
+                    <td>اصفهان</td>
+                    <td>۰۸:۳۰</td>
+                    <td>۱۵:۳۰</td>
+                    <td>۷ ساعت</td>
+                    <td>۲۲۰,۰۰۰ تومان</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="train-name">سعدی</div>
+                        <div class="train-type">درجه یک</div>
+                    </td>
+                    <td>تهران</td>
+                    <td>شیراز</td>
+                    <td>۱۴:۰۰</td>
+                    <td>۰۴:۰۰</td>
+                    <td>۱۴ ساعت</td>
+                    <td>۴۲۰,۰۰۰ تومان</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="train-name">شاه عباس</div>
+                        <div class="train-type">اکونومی</div>
+                    </td>
+                    <td>اصفهان</td>
+                    <td>مشهد</td>
+                    <td>۱۰:۰۰</td>
+                    <td>۲۲:۰۰</td>
+                    <td>۱۲ ساعت</td>
+                    <td>۳۰۰,۰۰۰ تومان</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>بخش قطار</h3>
+                <p>رزرو آنلاین بلیط تمامی قطارهای داخلی و بین‌المللی با بهترین خدمات و امکانات.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>لینک‌های مفید</h3>
+                <ul>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                    <li><a href="#">قوانین رزرو قطار</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">وبلاگ سفر</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>خدمات قطار</h3>
+                <ul>
+                    <li><a href="#">قطارهای داخلی</a></li>
+                    <li><a href="#">قطارهای بین‌المللی</a></li>
+                    <li><a href="#">قطارهای توریستی</a></li>
+                    <li><a href="#">قطارهای لوکس</a></li>
+                    <li><a href="#">رزرو کوپه خواب</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>تماس با ما</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۹۱۰۱۱۱۱۱</li>
+                    <li><i class="fas fa-envelope"></i> train@hotelplus.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© ۲۰۲۴ تمامی حقوق برای هتل‌مارکوپولو محفوظ است.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // مدیریت تب‌ها
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // مدیریت انتخاب کلاس قطار
+    document.querySelectorAll('.class-option').forEach(option => {
+        option.addEventListener('click', function () {
+            document.querySelectorAll('.class-option').forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // تنظیم تاریخ پیش‌فرض (فردا)
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('travel-date').value = tomorrow.toISOString().split('T')[0];
+
+    // انیمیشن اسکرول هدر
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+        }
+    });
+
+    // شبیه‌سازی جستجو
+    document.getElementById('search-trains').addEventListener('click', function () {
+        const origin = document.getElementById('origin').value;
+        const destination = document.getElementById('destination').value;
+        const date = document.getElementById('travel-date').value;
+        const selectedClass = document.querySelector('.class-option.active').getAttribute('data-class');
+
+        if (origin && destination) {
+            const classNames = {
+                'economy': 'اکونومی',
+                'business': 'بیزینس',
+                'first': 'درجه یک',
+                'sleeper': 'کوپه خواب'
+            };
+
+            alert(`در حال جستجوی قطار از ${origin} به ${destination} در تاریخ ${date} با کلاس ${classNames[selectedClass]} ...`);
+        } else {
+            alert('لطفاً مبدأ و مقصد را وارد کنید.');
+        }
+    });
+</script>
+<script src="config.js"></script>
+<script src="train.js"></script>
+</body>
+</html>

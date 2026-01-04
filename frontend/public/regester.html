@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>هتل VIP - ثبت‌نام</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* استایل‌های اضافی برای فرم */
+        .register-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8f4f8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .register-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .register-header {
+            background: var(--gradient);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .register-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .register-form {
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+        }
+
+        .form-input-icon {
+            position: relative;
+        }
+
+        .form-input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .form-input-icon input {
+            padding-right: 1.2rem;
+            padding-left: 3rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remember-me input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Vazirmatn', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 35, 126, 0.3);
+        }
+
+        .register-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            color: #666;
+        }
+
+        .register-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 45%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .register-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 45%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .social-register {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 500;
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+
+        .register-footer {
+            text-align: center;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        .register-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .register-footer a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .register-container {
+                margin: 1rem;
+            }
+
+            .register-header,
+            .register-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .social-register {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- ناوبری -->
+<header>
+    <div class="container nav-container">
+        <a class="logo" href="#">
+            <i class="fas fa-hotel"></i>
+            هتل VIP
+        </a>
+
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">خانه</a></li>
+            <li><a href="hotels.html">هتل‌ها</a></li>
+            <li><a href="about.html">درباره ما</a></li>
+            <li><a href="contact.html">تماس با ما</a></li>
+            <li><a class="active" href="register.html">ثبت‌نام</a></li>
+            <li><a href="login.html">ورود</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+            <button class="btn btn-outline">ورود</button>
+            <button class="btn btn-primary">ثبت‌نام</button>
+        </div>
+    </div>
+</header>
+
+<!-- بخش ثبت‌نام -->
+<section class="register-section">
+    <div class="container">
+        <div class="register-container">
+            <div class="register-header">
+                <h2>ثبت‌نام در هتل VIP</h2>
+                <p>حساب کاربری خود را ایجاد کنید و از مزایای آن بهره‌مند شوید</p>
+            </div>
+
+            <form class="register-form" id="registerForm">
+                <div class="form-group">
+                    <label for="first_name">نام</label>
+                    <div class="form-input-icon">
+                        <i class="fas fa-user"></i>
+                        <input class="form-input" id="first_name" name="first_name" placeholder="نام خود را وارد کنید"
+                               required type="text">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">نام خانوادگی</label>
+                    <div class="form-input-icon">
+                        <i class="fas fa-user-tag"></i>
+                        <input class="form-input" id="last_name" name="last_name" placeholder="نام خانوادگی خود را وارد کنید"
+                               required type="text">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_id">نام کاربری</label>
+                    <div class="form-input-icon">
+                        <i class="fas fa-at"></i>
+                        <input class="form-input" id="user_id" name="user_id" placeholder="نام کاربری دلخواه خود را وارد کنید"
+                               required type="text">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">ایمیل</label>
+                    <div class="form-input-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input class="form-input" id="email" name="email" placeholder="example@email.com" required
+                               type="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">کلمه عبور</label>
+                    <div class="form-input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input class="form-input" id="password" name="password" placeholder="کلمه عبور قوی انتخاب کنید"
+                               required type="password">
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">تکرار کلمه عبور</label>
+                    <div class="form-input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input class="form-input" id="confirm_password" name="confirm_password" placeholder="کلمه عبور را مجدداً وارد کنید"
+                               required type="password">
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input id="terms" name="terms" required type="checkbox">
+                        <label for="terms">با <a href="#" style="color: var(--primary);">قوانین و مقررات</a>
+                            موافقم</label>
+                    </div>
+                </div>
+
+                <button class="register-btn" type="submit">ثبت‌نام</button>
+
+                <div class="register-divider">یا با استفاده از</div>
+
+                <div class="social-register">
+                    <button class="social-btn google" type="button">
+                        <i class="fab fa-google"></i>
+                        گوگل
+                    </button>
+                    <button class="social-btn facebook" type="button">
+                        <i class="fab fa-facebook-f"></i>
+                        فیسبوک
+                    </button>
+                </div>
+
+                <div class="register-footer">
+                    قبلاً حساب کاربری دارید؟ <a href="login.html">وارد شوید</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- اسکریپت برای بررسی قدرت رمز عبور -->
+<script>
+    document.getElementById('password').addEventListener('input', function (e) {
+        const password = e.target.value;
+        const strengthBar = document.getElementById('strengthBar');
+        let strength = 0;
+
+        // بررسی طول رمز عبور
+        if (password.length >= 8) strength += 25;
+        if (password.length >= 12) strength += 10;
+
+        // بررسی حروف بزرگ و کوچک
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength += 25;
+
+        // بررسی اعداد
+        if (/[0-9]/.test(password)) strength += 25;
+
+        // بررسی کاراکترهای خاص
+        if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+
+        // محدود کردن به حداکثر 100
+        strength = Math.min(strength, 100);
+
+        // تغییر رنگ بر اساس قدرت
+        strengthBar.style.width = strength + '%';
+
+        if (strength < 50) {
+            strengthBar.style.backgroundColor = '#f44336'; // قرمز
+        } else if (strength < 75) {
+            strengthBar.style.backgroundColor = '#ff9800'; // نارنجی
+        } else {
+            strengthBar.style.backgroundColor = '#4caf50'; // سبز
+        }
+    });
+
+    // بررسی تطابق رمز عبور
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert('کلمه عبور و تکرار آن مطابقت ندارند!');
+            document.getElementById('confirm_password').focus();
+        }
+
+        if (!document.getElementById('terms').checked) {
+            e.preventDefault();
+            alert('لطفاً با قوانین و مقررات موافقت کنید!');
+        }
+    });
+</script>
+<script src="config.js"></script>
+<script src="user.js"></script>
+</body>
+</html>

@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>رزرو پرواز | بلیط هواپیما داخلی و خارجی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d47a1;
+            --secondary: #ff3d00;
+            --accent: #2979ff;
+            --light: #f5f7fa;
+            --dark: #263238;
+            --gradient: linear-gradient(135deg, #0d47a1, #1565c0);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        header {
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+            background: rgba(13, 71, 161, 0.05);
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary);
+            background: rgba(255, 61, 0, 0.1);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 71, 161, 0.3);
+        }
+
+        /* Hero Section */
+        .flight-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
+            url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flight-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(13, 71, 161, 0.3), rgba(255, 61, 0, 0.3));
+            z-index: 1;
+        }
+
+        .flight-hero > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Flight Search */
+        .flight-search {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            animation: slideUp 1s ease 0.6s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .trip-type-selector {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .trip-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .trip-option:hover {
+            border-color: var(--accent);
+            background: rgba(41, 121, 255, 0.05);
+        }
+
+        .trip-option.active {
+            background: var(--gradient);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .flight-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(41, 121, 255, 0.1);
+        }
+
+        .switch-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .switch-btn button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .switch-btn button:hover {
+            transform: rotate(180deg);
+            background: var(--accent);
+            color: white;
+        }
+
+        .search-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto 0;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(13, 71, 161, 0.3);
+        }
+
+        /* Offers Section */
+        .offers-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        .offer-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .offer-body {
+            padding: 2rem;
+        }
+
+        .flight-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .flight-info {
+            text-align: center;
+        }
+
+        .flight-info .time {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .flight-info .city {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .flight-duration {
+            text-align: center;
+            color: #666;
+        }
+
+        .airline-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .airline-logo {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .offer-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .book-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background: linear-gradient(135deg, #1565c0, #2979ff);
+            transform: translateY(-2px);
+        }
+
+        /* Airlines Section */
+        .airlines-section {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        .airlines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .airline-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .airline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        .airline-logo-lg {
+            width: 80px;
+            height: 80px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .flight-hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .flight-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .flight-form {
+                grid-template-columns: 1fr;
+            }
+
+            .trip-type-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .airlines-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="container nav-container">
+        <a class="logo" href="config.html">
+            <i class="fas fa-rocket"></i>
+            پرواز مارکوپولو
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="index.html"><i class="fas fa-bed"></i> هتل</a></li>
+            <li><a class="active" href="flight.html"><i class="fas fa-plane"></i> پرواز</a></li>
+            <li><a href="train.html"><i class="fas fa-train"></i> قطار</a></li>
+            <li><a href="#"><i class="fas fa-bus"></i> اتوبوس</a></li>
+            <li><a href="#"><i class="fas fa-suitcase-rolling"></i> تور</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+            <button class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> ورود</button>
+            <button class="btn btn-primary"><i class="fas fa-user-plus"></i> ثبت‌نام</button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="flight-hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>پروازی راحت، سفری به یادماندنی</h1>
+            <p>بلیط پرواز داخلی و خارجی را با بهترین قیمت و بیشترین خدمات از ما بخواهید. تضمین کیفیت و پشتیبانی ۲۴
+                ساعته.</p>
+
+            <div class="flight-search">
+                <div class="trip-type-selector">
+                    <div class="trip-option active">
+                        <i class="fas fa-plane"></i>
+                        <span>یک‌طرفه</span>
+                    </div>
+                    <div class="trip-option">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>رفت و برگشت</span>
+                    </div>
+                    <div class="trip-option">
+                        <i class="fas fa-route"></i>
+                        <span>چند مقصدی</span>
+                    </div>
+                </div>
+
+                <div class="flight-form">
+                    <div class="input-group">
+                        <i class="fas fa-plane-departure"></i>
+                        <input list="airports" placeholder="مبدأ (شهر یا فرودگاه)" type="text">
+                        <datalist id="airports">
+                            <option value="تهران (IKA)"></option>
+                            <option value="مشهد (MHD)"></option>
+                            <option value="اصفهان (IFN)"></option>
+                            <option value="شیراز (SYZ)"></option>
+                            <option value="کیش (KIH)"></option>
+                        </datalist>
+                    </div>
+
+                    <div class="switch-btn">
+                        <button id="switchAirports" type="button">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-plane-arrival"></i>
+                        <input placeholder="مقصد (شهر یا فرودگاه)" type="text">
+                    </div>
+                </div>
+
+                <div class="flight-form">
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input id="departDate" type="date">
+                    </div>
+
+                    <div class="input-group" id="returnDateGroup">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input id="returnDate" type="date">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-user-friends"></i>
+                        <select id="passengers">
+                            <option>۱ مسافر</option>
+                            <option>۲ مسافر</option>
+                            <option>۳ مسافر</option>
+                            <option>۴ مسافر</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-chair"></i>
+                        <select id="cabinClass">
+                            <option>اکونومی</option>
+                            <option>بیزینس</option>
+                            <option>فرست کلاس</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                    جستجوی پرواز
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Offers Section -->
+<section class="offers-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>پروازهای ویژه امروز</h2>
+            <p>پیشنهادات ویژه با بهترین قیمت برای مقاصد محبوب</p>
+        </div>
+
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-header">
+                    <h3>تهران → مشهد</h3>
+                </div>
+                <div class="offer-body">
+                    <div class="flight-details">
+                        <div class="flight-info">
+                            <div class="time">۰۸:۳۰</div>
+                            <div class="city">تهران (IKA)</div>
+                        </div>
+                        <div class="flight-duration">
+                            <i class="fas fa-plane"></i>
+                            <div>۱ ساعت ۳۰ دقیقه</div>
+                            <div>پرواز مستقیم</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="time">۱۰:۰۰</div>
+                            <div class="city">مشهد (MHD)</div>
+                        </div>
+                    </div>
+
+                    <div class="airline-info">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div>
+                            <h4>ایران ایر</h4>
+                            <p>ایرلاین ملی ایران</p>
+                        </div>
+                    </div>
+
+                    <div class="offer-price">۱,۲۰۰,۰۰۰ تومان</div>
+                    <button class="book-btn">رزرو پرواز</button>
+                </div>
+            </div>
+
+            <div class="offer-card">
+                <div class="offer-header">
+                    <h3>تهران → استانبول</h3>
+                </div>
+                <div class="offer-body">
+                    <div class="flight-details">
+                        <div class="flight-info">
+                            <div class="time">۱۴:۴۵</div>
+                            <div class="city">تهران (IKA)</div>
+                        </div>
+                        <div class="flight-duration">
+                            <i class="fas fa-plane"></i>
+                            <div>۳ ساعت</div>
+                            <div>پرواز مستقیم</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="time">۱۷:۴۵</div>
+                            <div class="city">استانبول (IST)</div>
+                        </div>
+                    </div>
+
+                    <div class="airline-info">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div>
+                            <h4>ترکیش ایرلاینز</h4>
+                            <p>ایرلاین ۵ ستاره</p>
+                        </div>
+                    </div>
+
+                    <div class="offer-price">۳,۵۰۰,۰۰۰ تومان</div>
+                    <button class="book-btn">رزرو پرواز</button>
+                </div>
+            </div>
+
+            <div class="offer-card">
+                <div class="offer-header">
+                    <h3>تهران → دبی</h3>
+                </div>
+                <div class="offer-body">
+                    <div class="flight-details">
+                        <div class="flight-info">
+                            <div class="time">۲۲:۱۵</div>
+                            <div class="city">تهران (IKA)</div>
+                        </div>
+                        <div class="flight-duration">
+                            <i class="fas fa-plane"></i>
+                            <div>۲ ساعت ۱۵ دقیقه</div>
+                            <div>پرواز مستقیم</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="time">۰۰:۳۰</div>
+                            <div class="city">دبی (DXB)</div>
+                        </div>
+                    </div>
+
+                    <div class="airline-info">
+                        <div class="airline-logo">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div>
+                            <h4>امارات</h4>
+                            <p>ایرلاین ۵ ستاره</p>
+                        </div>
+                    </div>
+
+                    <div class="offer-price">۲,۸۰۰,۰۰۰ تومان</div>
+                    <button class="book-btn">رزرو پرواز</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Airlines Section -->
+<section class="airlines-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>همکاری با بهترین ایرلاین‌ها</h2>
+            <p>با بیش از ۵۰ ایرلاین داخلی و بین‌المللی همکاری می‌کنیم</p>
+        </div>
+
+        <div class="airlines-grid">
+            <div class="airline-item">
+                <div class="airline-logo-lg">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h4>ایران ایر</h4>
+            </div>
+
+            <div class="airline-item">
+                <div class="airline-logo-lg">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h4>ماهان ایر</h4>
+            </div>
+
+            <div class="airline-item">
+                <div class="airline-logo-lg">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h4>ترکیش</h4>
+            </div>
+
+            <div class="airline-item">
+                <div class="airline-logo-lg">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h4>امارات</h4>
+            </div>
+
+            <div class="airline-item">
+                <div class="airline-logo-lg">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h4>قطر ایرویز</h4>
+            </div>
+
+            <div class="airline-item">
+                <div class="airline-logo-lg">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h4>لوفت‌هانزا</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>فلایت‌پلاس</h3>
+                <p>سامانه رزرو آنلاین پرواز با ارائه بهترین قیمت و خدمات ویژه برای تجربه‌ای بی‌نظیر از سفرهای هوایی.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>مقاصد پرطرفدار</h3>
+                <ul>
+                    <li><a href="#">تهران به مشهد</a></li>
+                    <li><a href="#">تهران به استانبول</a></li>
+                    <li><a href="#">تهران به دبی</a></li>
+                    <li><a href="#">تهران به آنتالیا</a></li>
+                    <li><a href="#">تهران به تفلیس</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>خدمات ویژه</h3>
+                <ul>
+                    <li><a href="#">بلیط ارزان</a></li>
+                    <li><a href="#">تور لحظه آخری</a></li>
+                    <li><a href="#">ویزای فرودگاهی</a></li>
+                    <li><a href="#">بیمه مسافرتی</a></li>
+                    <li><a href="#">کرایه خودرو</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>تماس با ما</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۹۱۰۲۲۲۲۲</li>
+                    <li><i class="fas fa-envelope"></i> info@flightplus.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، میدان ونک</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© ۲۰۲۴ تمامی حقوق برای فلایت‌پلاس محفوظ است.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // تاریخ‌های پیش‌فرض
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    document.getElementById('departDate').value = today.toISOString().split('T')[0];
+    document.getElementById('returnDate').value = tomorrow.toISOString().split('T')[0];
+
+    // مدیریت نوع سفر
+    const tripOptions = document.querySelectorAll('.trip-option');
+    const returnDateGroup = document.getElementById('returnDateGroup');
+
+    tripOptions.forEach(option => {
+        option.addEventListener('click', function () {
+            tripOptions.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+
+            if (this.textContent.includes('یک‌طرفه')) {
+                returnDateGroup.style.display = 'none';
+            } else {
+                returnDateGroup.style.display = 'block';
+            }
+        });
+    });
+
+    // تعویض مبدا و مقصد
+    document.getElementById('switchAirports').addEventListener('click', function () {
+        const origin = document.querySelector('input[placeholder*="مبدأ"]');
+        const destination = document.querySelector('input[placeholder*="مقصد"]');
+        const temp = origin.value;
+        origin.value = destination.value;
+        destination.value = temp;
+    });
+
+    // انیمیشن اسکرول
+    window.addEventListener('scroll', function () {
+        const cards = document.querySelectorAll('.offer-card, .airline-item');
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (cardTop < windowHeight - 100) {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    // مدیریت دکمه رزرو
+    document.querySelectorAll('.book-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const flight = this.closest('.offer-card').querySelector('.offer-header h3').textContent;
+            alert(`پرواز ${flight} به سبد خرید شما اضافه شد.`);
+        });
+    });
+
+    // انیمیشن اولیه برای کارت‌ها
+    document.querySelectorAll('.offer-card, .airline-item').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'all 0.6s ease';
+    });
+
+    // تریگر انیمیشن
+    setTimeout(() => {
+        window.dispatchEvent(new Event('scroll'));
+    }, 1000);
+</script>
+<script src="config.js"></script>
+<script src="flight.js"></script>
+</body>
+</html>

@@ -1,17 +1,14 @@
 package com.reyhan.hotel.config; // پکیج تنظیمات و داده‌های اولیه
 
-import org.springframework.boot.CommandLineRunner; // اینترفیس برای اجرای کد هنگام استارت
-import org.springframework.context.annotation.Bean; // برای تعریف Bean
-import org.springframework.context.annotation.Configuration; // مشخص کردن کلاس پیکربندی
-import org.springframework.transaction.annotation.Transactional; // تضمین تراکنش هنگام درج داده
+import com.reyhan.hotel.entity.*;
+import com.reyhan.hotel.repository.*;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate; // نوع تاریخ برای رزروها
-
-import com.reyhan.hotel.entity.Hotel; // موجودیت هتل
-import com.reyhan.hotel.entity.Reservation; // موجودیت رزرو
-import com.reyhan.hotel.entity.Room; // موجودیت اتاق
-import com.reyhan.hotel.repository.HotelRepository; // مخزن هتل
-import com.reyhan.hotel.repository.ReservationRepository; // مخزن رزرو
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * کلاس پیکربندی برای بارگذاری داده‌های اولیه در دیتابیس
@@ -29,7 +26,8 @@ public class DataLoader { // کلاس مسئول درج داده‌های نمو
 	 */
 	@Bean // تعریف Bean برای اجرا پس از راه‌اندازی
 	@Transactional // تضمین می‌کند کل فرآیند درج در یک تراکنش باشد
-	CommandLineRunner loadDemoData(HotelRepository hotelRepository, ReservationRepository reservationRepository) { // تزریق مخازن لازم
+    CommandLineRunner loadDemoData(HotelRepository hotelRepository, ReservationRepository reservationRepository,
+                                   BusRepository busRepository, FlightRepository flightRepository, TrainRepository trainRepository) { // تزریق مخازن لازم
 		return args -> { // پیاده‌سازی CommandLineRunner به‌صورت Lambda
 			if (hotelRepository.count() > 0) return; // اگر قبلاً داده‌ای وجود دارد، از درج مجدد خودداری می‌کند
 
@@ -424,6 +422,101 @@ public class DataLoader { // کلاس مسئول درج داده‌های نمو
 			res5.setStartDate(LocalDate.now().plusDays(25)); // 25 روز دیگر
 			res5.setEndDate(LocalDate.now().plusDays(27)); // 27 روز دیگر
 			reservationRepository.save(res5); // ذخیره رزرو 5
+
+            // بارگذاری داده‌های نمونه برای اتوبوس
+            if (busRepository.count() == 0) {
+                Bus bus1 = new Bus();
+                bus1.setOrigin("تهران");
+                bus1.setDestination("مشهد");
+                bus1.setDepartureDate(LocalDate.now().plusDays(1));
+                bus1.setDepartureTime(LocalTime.of(22, 0));
+                bus1.setArrivalTime(LocalTime.of(8, 0));
+                bus1.setCompany("شرکت مسافربری آسمان");
+                bus1.setBusType("VIP");
+                bus1.setAvailableSeats(15);
+                bus1.setPrice(180000.0);
+                bus1.setOriginTerminal("ترمینال بیهقی");
+                bus1.setDestinationTerminal("ترمینال امام رضا");
+                busRepository.save(bus1);
+
+                Bus bus2 = new Bus();
+                bus2.setOrigin("تهران");
+                bus2.setDestination("اصفهان");
+                bus2.setDepartureDate(LocalDate.now().plusDays(1));
+                bus2.setDepartureTime(LocalTime.of(14, 30));
+                bus2.setArrivalTime(LocalTime.of(20, 30));
+                bus2.setCompany("شرکت سپهر سیر");
+                bus2.setBusType("معمولی");
+                bus2.setAvailableSeats(8);
+                bus2.setPrice(90000.0);
+                bus2.setOriginTerminal("ترمینال جنوب");
+                bus2.setDestinationTerminal("ترمینال کاوه");
+                busRepository.save(bus2);
+            }
+
+            // بارگذاری داده‌های نمونه برای پرواز
+            if (flightRepository.count() == 0) {
+                Flight flight1 = new Flight();
+                flight1.setOrigin("تهران");
+                flight1.setDestination("مشهد");
+                flight1.setOriginAirport("تهران (IKA)");
+                flight1.setDestinationAirport("مشهد (MHD)");
+                flight1.setDepartureDate(LocalDate.now().plusDays(1));
+                flight1.setDepartureTime(LocalTime.of(8, 30));
+                flight1.setArrivalTime(LocalTime.of(10, 0));
+                flight1.setAirline("ایران ایر");
+                flight1.setFlightNumber("IR123");
+                flight1.setCabinClass("اکونومی");
+                flight1.setAvailableSeats(20);
+                flight1.setPrice(1200000.0);
+                flight1.setIsRoundTrip(false);
+                flightRepository.save(flight1);
+
+                Flight flight2 = new Flight();
+                flight2.setOrigin("تهران");
+                flight2.setDestination("استانبول");
+                flight2.setOriginAirport("تهران (IKA)");
+                flight2.setDestinationAirport("استانبول (IST)");
+                flight2.setDepartureDate(LocalDate.now().plusDays(1));
+                flight2.setDepartureTime(LocalTime.of(14, 45));
+                flight2.setArrivalTime(LocalTime.of(17, 45));
+                flight2.setAirline("ترکیش ایرلاینز");
+                flight2.setFlightNumber("TK456");
+                flight2.setCabinClass("بیزینس");
+                flight2.setAvailableSeats(10);
+                flight2.setPrice(3500000.0);
+                flight2.setIsRoundTrip(false);
+                flightRepository.save(flight2);
+            }
+
+            // بارگذاری داده‌های نمونه برای قطار
+            if (trainRepository.count() == 0) {
+                Train train1 = new Train();
+                train1.setOrigin("تهران");
+                train1.setDestination("مشهد");
+                train1.setDepartureDate(LocalDate.now().plusDays(1));
+                train1.setDepartureTime(LocalTime.of(17, 0));
+                train1.setArrivalTime(LocalTime.of(5, 0));
+                train1.setTrainName("شهید قاسم سلیمانی");
+                train1.setTrainClass("کوپه خواب");
+                train1.setAvailableSeats(12);
+                train1.setPrice(350000.0);
+                train1.setStops("سمنان، شاهرود، نیشابور");
+                trainRepository.save(train1);
+
+                Train train2 = new Train();
+                train2.setOrigin("تهران");
+                train2.setDestination("اصفهان");
+                train2.setDepartureDate(LocalDate.now().plusDays(1));
+                train2.setDepartureTime(LocalTime.of(8, 30));
+                train2.setArrivalTime(LocalTime.of(15, 30));
+                train2.setTrainName("چمران");
+                train2.setTrainClass("بیزینس");
+                train2.setAvailableSeats(15);
+                train2.setPrice(220000.0);
+                train2.setStops("قم، کاشان");
+                trainRepository.save(train2);
+            }
 		};
 	}
 }

@@ -1,165 +1,301 @@
 <!DOCTYPE html>
-<!-- صفحه اصلی سامانه رزرواسیون هتل -->
 <html dir="rtl" lang="fa">
 <head>
-    <!-- تنظیمات متا و کدگذاری -->
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>رزرو هتل - سامانه رزرواسیون</title>
-    <!-- لینک به فایل CSS برای استایل‌دهی -->
-    <link href="styles.css" rel="stylesheet">
+    <title>رزرو هتل لوکس | بهترین هتل‌های ایران و جهان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+    <style>
+
+    </style>
 </head>
 <body>
-<!-- نوار بالای صفحه (Navigation Bar) -->
-<nav class="topnav">
-    <div class="container nav-inner">
-        <!-- لوگو و نام سایت -->
-        <div class="brand">رزرو هتل</div>
-        <!-- منوی اصلی سایت -->
-        <ul class="nav-links">
-            <li><a href="#">هتل</a></li>
-            <li><a href="#">پرواز</a></li>
-            <li><a href="#">قطار</a></li>
-            <li><a href="#">اتوبوس</a></li>
+<!-- Header -->
+<header>
+    <div class="container nav-container">
+        <a class="logo" href="config.html">
+            <i class="fas fa-crown"></i>
+            هتل مارکوپولو
+        </a>
+
+        <ul class="nav-menu">
+            <li><a class="active" href="index.html"><i class="fas fa-bed"></i> هتل</a></li>
+            <li><a href="flight.html"><i class="fas fa-plane"></i> پرواز</a></li>
+            <li><a href="train.html"><i class="fas fa-train"></i> قطار</a></li>
+            <li><a href="#"><i class="fas fa-bus"></i> اتوبوس</a></li>
+            <li><a href="#"><i class="fas fa-umbrella-beach"></i> تور</a></li>
         </ul>
-        <!-- دکمه‌های ورود و ثبت‌نام -->
-        <div class="nav-actions">
-            <button class="btn ghost">ورود</button>
-            <button class="btn primary">ثبت‌نام</button>
+
+        <div class="auth-buttons">
+            <button class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> ورود</button>
+            <button class="btn btn-primary" onclick="window.location.href='regester.html'"><i
+                    class="fas fa-user-plus"></i> ثبت‌نام
+            </button>
+
         </div>
     </div>
-</nav>
+</header>
 
-<!-- بخش اصلی جستجو (Hero Section) -->
+<!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <!-- عنوان اصلی صفحه -->
-        <h1>جستجو و رزرو هتل</h1>
-        <!-- توضیحات -->
-        <p class="muted">مقصد را انتخاب کنید، تاریخ‌ها را وارد کنید و بهترین اتاق‌ها را ببینید.</p>
-        <!-- فرم جستجو -->
-        <div class="searchbar">
-            <!-- فیلد انتخاب هتل -->
-            <div class="field">
-                <label>هتل</label>
-                <select id="hotelSelect"></select>
+        <div class="hero-content">
+            <h1>تجربه‌ای فراموش‌نشدنی در بهترین هتل‌ها</h1>
+            <p>با جستجوی هوشمند و رزرو آنلاین، اقامتی لوکس و به‌یادماندنی را در بیش از ۵۰۰۰ هتل در ایران و جهان تجربه
+                کنید.</p>
+
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="tab active"><i class="fas fa-hotel"></i> هتل</button>
+                    <button class="tab"><i class="fas fa-home"></i> ویلا</button>
+                    <button class="tab"><i class="fas fa-building"></i> آپارتمان</button>
+                </div>
+
+                <div class="search-grid">
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input list="cities" placeholder="مقصد (شهر، منطقه یا نام هتل)" type="text">
+                        <datalist id="cities">
+                            <option value="تهران">تهران</option>
+                            <option value="مشهد">مشهد</option>
+                            <option value="اصفهان">اصفهان</option>
+                            <option value="شیراز">شیراز</option>
+                            <option value="کیش">کیش</option>
+                        </datalist>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input id="checkin" type="date">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input id="checkout" type="date">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-user-friends"></i>
+                        <select>
+                            <option>۲ بزرگسال - ۱ اتاق</option>
+                            <option>۱ بزرگسال - ۱ اتاق</option>
+                            <option>۲ بزرگسال + ۱ کودک</option>
+                            <option>گروهی (بیش از ۴ نفر)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                    جستجوی هتل
+                </button>
             </div>
-            <!-- فیلد تاریخ شروع -->
-            <div class="field">
-                <label>از تاریخ</label>
-                <input id="fromDate" type="date">
-            </div>
-            <!-- فیلد تاریخ پایان -->
-            <div class="field">
-                <label>تا تاریخ</label>
-                <input id="toDate" type="date">
-            </div>
-            <!-- دکمه جستجو -->
-            <button class="btn primary xl" id="searchBtn">جستجو</button>
         </div>
-        <!-- المان نمایش پیام‌ها (خطا یا موفقیت) -->
-        <div id="message"></div>
     </div>
 </section>
 
-<!-- محتوای اصلی صفحه -->
-<div class="container page">
-    <!-- نوار کناری فیلترها -->
-    <aside class="filters">
-        <h3>فیلترها</h3>
-        <!-- چک‌باکس فیلتر سوئیت -->
-        <label class="checkbox">
-            <input id="filterSuite" type="checkbox"> فقط سوئیت‌ها
-        </label>
-        <!-- چک‌باکس فیلتر ظرفیت -->
-        <label class="checkbox">
-            <input id="filterCapacity3" type="checkbox"> ظرفیت ۳ نفر به بالا
-        </label>
-        <!-- توضیح درباره فیلترها -->
-        <p class="hint muted">فیلترها صرفاً نمایشی‌اند؛ لیست اتاق‌ها از API بک‌اند می‌آید.</p>
-    </aside>
-
-    <!-- بخش اصلی محتوا -->
-    <main class="content">
-        <!-- بخش نمایش هتل‌های پیشنهادی که از بک‌اند لود می‌شوند -->
-        <section> <!-- سکشن هتل‌های پیشنهادی -->
-            <h2>هتل‌های پیشنهادی</h2> <!-- عنوان بخش هتل‌های پیشنهادی -->
-            <div class="grid" id="hotelsGrid"></div> <!-- گرید کارت‌های هتل که با JS پر می‌شود -->
-        </section>
-
-        <!-- جدول کامل هتل‌ها بر اساس داده‌های بک‌اند -->
-        <section class="hotel-list"> <!-- سکشن فهرست کامل هتل‌ها -->
-            <h2>فهرست هتل‌های ثبت‌شده</h2> <!-- عنوان جدول هتل‌ها -->
-            <div class="card"> <!-- کارت حاوی جدول -->
-                <div class="table-wrapper"> <!-- ظرف اسکرول‌پذیر برای جدول -->
-                    <table class="data-table"> <!-- جدول نمایش مشخصات هتل‌ها -->
-                        <thead> <!-- هدر جدول -->
-                            <tr> <!-- ردیف عنوان ستون‌ها -->
-                                <th>شناسه</th> <!-- ستون شناسه هتل -->
-                                <th>نام هتل</th> <!-- ستون نام هتل -->
-                                <th>شهر</th> <!-- ستون شهر هتل -->
-                                <th>آدرس</th> <!-- ستون آدرس هتل -->
-                            </tr>
-                        </thead>
-                        <tbody id="hotelsTableBody"> <!-- بدنه جدول که با JS از /api/hotels پر می‌شود -->
-                            <!-- ردیف‌های هتل از طریق JS تکمیل می‌شوند -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش نمایش نتایج جستجو (اتاق‌های موجود) -->
-        <section class="results"> <!-- سکشن نتایج جستجوی اتاق‌ها -->
-            <h2>اتاق‌های موجود</h2> <!-- عنوان بخش اتاق‌های موجود -->
-            <div class="grid grid-rooms" id="roomsGrid"></div> <!-- گرید کارت‌های اتاق که با جستجو پر می‌شود -->
-        </section>
-
-        <!-- بخش فرم رزرواسیون -->
-        <section class="reservation"> <!-- سکشن فرم رزرو -->
-            <h2>ثبت رزرو</h2> <!-- عنوان فرم رزرو -->
-            <!-- فرم رزرو (در ابتدا مخفی است) -->
-            <div class="card hidden" id="reservationForm"> <!-- کارت فرم که پس از انتخاب اتاق نمایش داده می‌شود -->
-                <!-- نمایش شماره اتاق انتخاب شده -->
-                <p>اتاق انتخاب شده: <b id="selectedRoom"></b></p> <!-- نمایش شماره اتاق انتخاب‌شده -->
-                <!-- فیلدهای فرم رزرو -->
-                <div class="form-row"> <!-- ردیف فیلدهای نام، ایمیل و دکمه -->
-                    <input id="guestName" placeholder="نام و نام خانوادگی" type="text"> <!-- ورودی نام مهمان -->
-                    <input id="guestEmail" placeholder="ایمیل" type="email"> <!-- ورودی ایمیل مهمان -->
-                    <button class="btn success" id="reserveBtn">ثبت رزرو</button> <!-- دکمه ارسال رزرو -->
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش مشاهده رزرو بر اساس شناسه -->
-        <section class="reservation-lookup"> <!-- سکشن پیگیری رزرو ثبت‌شده -->
-            <h2>پیگیری رزرو ثبت‌شده</h2> <!-- عنوان بخش پیگیری رزرو -->
-            <div class="card"> <!-- کارت فرم پیگیری -->
-                <div class="form-row"> <!-- ردیف ورودی شناسه و دکمه -->
-                    <input id="reservationIdInput" placeholder="شناسه رزرو را وارد کنید" type="number" min="1"> <!-- ورودی شناسه رزرو -->
-                    <button class="btn primary" id="reservationLookupBtn">نمایش رزرو</button> <!-- دکمه فراخوانی API رزرو -->
-                </div>
-                <div class="reservation-details" id="reservationDetails"> <!-- ناحیه نمایش جزئیات رزرو -->
-                    <!-- اطلاعات رزرو در اینجا نمایش داده می‌شود -->
-                </div>
-            </div>
-        </section>
-    </main>
-</div>
-
-<!-- فوتر صفحه -->
-<footer class="site-footer">
+<!-- Features Section -->
+<section class="features">
     <div class="container">
-        <p>© 2025 سامانه رزرواسیون</p>
+        <div class="section-title">
+            <h2>چرا هتل‌ مارکوپولو؟</h2>
+            <p>با خدمات ویژه ما، سفری راحت و بی‌دغدغه را تجربه کنید</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>ضمانت بهترین قیمت</h3>
+                <p>در صورت یافتن قیمت کمتر، ما ۱۰٪ تفاوت را به شما بازمی‌گردانیم</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>پشتیبانی ۲۴ ساعته</h3>
+                <p>تیم پشتیبانی ما در تمام مراحل سفر کنار شماست</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>رزرو آنی</h3>
+                <p>تأیید فوری رزرو و دریافت وoucher در کمتر از ۲ دقیقه</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>امتیازدهی واقعی</h3>
+                <p>بر اساس نظرات واقعی مسافران، بهترین هتل را انتخاب کنید</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Hotels -->
+<section class="popular-hotels">
+    <div class="container">
+        <div class="section-title">
+            <h2>هتل‌های پرطرفدار</h2>
+            <p>محبوب‌ترین هتل‌ها بر اساس انتخاب مسافران</p>
+        </div>
+
+        <div class="hotels-grid">
+            <div class="hotel-card">
+                <div class="hotel-img">
+                    <img alt="هتل اصفهان"
+                         src="https://images.unsplash.com/photo-1564501049418-3c27787d01e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+                </div>
+                <div class="hotel-info">
+                    <h3>هتل عباسی اصفهان</h3>
+                    <div class="hotel-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(۴۷۸ نظر)</span>
+                    </div>
+                    <p><i class="fas fa-map-marker-alt"></i> اصفهان، خیابان چهارباغ</p>
+                    <div class="hotel-price">شبانه از ۲,۵۰۰,۰۰۰ تومان</div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img">
+                    <img alt="هتل تهران"
+                         src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+                </div>
+                <div class="hotel-info">
+                    <h3>هتل اسپیناس تهران</h3>
+                    <div class="hotel-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>(۸۹۲ نظر)</span>
+                    </div>
+                    <p><i class="fas fa-map-marker-alt"></i> تهران، میدان ونک</p>
+                    <div class="hotel-price">شبانه از ۳,۲۰۰,۰۰۰ تومان</div>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-img">
+                    <img alt="هتل کیش"
+                         src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+                </div>
+                <div class="hotel-info">
+                    <h3>هتل ترنج کیش</h3>
+                    <div class="hotel-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>(۱,۲۳۴ نظر)</span>
+                    </div>
+                    <p><i class="fas fa-map-marker-alt"></i> کیش، بلوار دریا</p>
+                    <div class="hotel-price">شبانه از ۴,۵۰۰,۰۰۰ تومان</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>هتل‌پلاس</h3>
+                <p>سامانه رزرو آنلاین هتل با ارائه بهترین خدمات و تضمین کمترین قیمت برای تجربه‌ای بی‌نظیر از سفر.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>لینک‌های مفید</h3>
+                <ul>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                    <li><a href="#">قوانین و مقررات</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">وبلاگ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>خدمات ما</h3>
+                <ul>
+                    <li><a href="#">رزرو هتل داخلی</a></li>
+                    <li><a href="#">رزرو هتل خارجی</a></li>
+                    <li><a href="#">تورهای لحظه آخری</a></li>
+                    <li><a href="#">اجاره ویلا و سوئیت</a></li>
+                    <li><a href="#">رزرو پرواز</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>تماس با ما</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۹۱۰۱۱۱۱۱</li>
+                    <li><i class="fas fa-envelope"></i> info@hotelplus.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© ۲۰۲۴ تمامی حقوق برای هتل‌پلاس محفوظ است.</p>
+        </div>
     </div>
 </footer>
 
-<!-- بارگذاری فایل‌های JavaScript -->
-<!-- فایل تنظیمات (آدرس بک‌اند) -->
+<script>
+    // تاریخ‌های پیش‌فرض
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    document.getElementById('checkin').value = today.toISOString().split('T')[0];
+    document.getElementById('checkout').value = tomorrow.toISOString().split('T')[0];
+
+    // انیمیشن اسکرول
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+        }
+    });
+
+    // مدیریت تب‌ها
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>
 <script src="config.js"></script>
-<!-- فایل اصلی منطق برنامه -->
 <script src="app.js"></script>
 </body>
 </html>
-
-

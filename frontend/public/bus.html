@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>رزرو اتوبوس | اتوبوس‌های داخلی | هتل مارکوپولو</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="bus-page">
+<!-- Header -->
+<header>
+    <div class="container nav-container">
+        <a class="logo" href="index.html">
+            <i class="fas fa-bus"></i>
+            هتل مارکوپولو
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="index.html"><i class="fas fa-bed"></i> هتل</a></li>
+            <li><a href="flight.html"><i class="fas fa-plane"></i> پرواز</a></li>
+            <li><a href="train.html"><i class="fas fa-train"></i> قطار</a></li>
+            <li><a class="active" href="bus.html"><i class="fas fa-bus"></i> اتوبوس</a></li>
+            <li><a href="tour.html"><i class="fas fa-umbrella-beach"></i> تور</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+            <button class="btn btn-outline" onclick="window.location.href='login.html'">
+                <i class="fas fa-sign-in-alt"></i> ورود
+            </button>
+            <button class="btn btn-primary" onclick="window.location.href='register.html'">
+                <i class="fas fa-user-plus"></i> ثبت‌نام
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section برای اتوبوس -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>سفر ارزان و راحت با اتوبوس</h1>
+            <p>رزرو آنلاین بلیط اتوبوس‌های VIP و معمولی به تمامی مقاصد داخلی</p>
+
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="tab active" data-tab="intercity">
+                        <i class="fas fa-road"></i> بین شهری
+                    </button>
+                    <button class="tab" data-tab="vip">
+                        <i class="fas fa-crown"></i> اتوبوس VIP
+                    </button>
+                    <button class="tab" data-tab="international">
+                        <i class="fas fa-globe"></i> بین‌المللی
+                    </button>
+                </div>
+
+                <div class="search-grid">
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input id="bus-origin" placeholder="مبدأ (شهر یا ترمینال)" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-flag-checkered"></i>
+                        <input id="bus-destination" placeholder="مقصد (شهر یا ترمینال)" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input id="bus-date" type="date">
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-user-friends"></i>
+                        <select id="bus-passengers">
+                            <option value="1">1 مسافر</option>
+                            <option selected value="2">2 مسافر</option>
+                            <option value="3">3 مسافر</option>
+                            <option value="4">4 مسافر</option>
+                            <option value="5">5+ مسافر</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- کلاس‌های اتوبوس -->
+                <div style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <div class="bus-class-option" data-class="normal">
+                        <i class="fas fa-bus"></i>
+                        <span>اتوبوس معمولی</span>
+                        <div class="price-note">اقتصادی</div>
+                    </div>
+                    <div class="bus-class-option active" data-class="vip">
+                        <i class="fas fa-crown"></i>
+                        <span>اتوبوس VIP</span>
+                        <div class="price-note">لوکس و راحت</div>
+                    </div>
+                    <div class="bus-class-option" data-class="sleeper">
+                        <i class="fas fa-bed"></i>
+                        <span>اتوبوس خواب</span>
+                        <div class="price-note">سفرهای شبانه</div>
+                    </div>
+                    <div class="bus-class-option" data-class="tourist">
+                        <i class="fas fa-camera"></i>
+                        <span>تور گردشگری</span>
+                        <div class="price-note">با تورلیدر</div>
+                    </div>
+                </div>
+
+                <button class="search-btn" id="search-bus">
+                    <i class="fas fa-search"></i>
+                    جستجوی اتوبوس
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section برای اتوبوس -->
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>مزایای سفر با اتوبوس</h2>
+            <p>با اتوبوس‌های مدرن، سفری ایمن و مقرون‌به‌صرفه را تجربه کنید</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3>قیمت مناسب</h3>
+                <p>ارزان‌ترین گزینه سفر بین شهری با کیفیت مناسب</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>تناوب سفر</h3>
+                <p>حرکت مداوم اتوبوس‌ها در تمام ساعات شبانه‌روز</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>اینترنت رایگان</h3>
+                <p>دسترسی به اینترنت پرسرعت در اتوبوس‌های VIP</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>پذیرایی</h3>
+                <p>سرو میان‌وعده و نوشیدنی در طول مسیر</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Bus Routes Section -->
+<section class="bus-routes">
+    <div class="container">
+        <div class="section-title">
+            <h2>مسیرهای پرطرفدار اتوبوس</h2>
+            <p>محبوب‌ترین مسیرهای اتوبوس در ایران</p>
+        </div>
+
+        <div class="routes-grid">
+            <div class="bus-route-card">
+                <div class="bus-route-header">
+                    <div class="bus-route-title">تهران - مشهد</div>
+                    <div class="bus-route-price">از ۱۸۰,۰۰۰ تومان</div>
+                </div>
+
+                <div class="bus-route-details">
+                    <div class="bus-route-time">
+                        <div class="time">۲۲:۰۰</div>
+                        <div class="city">تهران - ترمینال بیهقی</div>
+                    </div>
+
+                    <div class="bus-duration">۱۰ ساعت</div>
+
+                    <div class="bus-route-time">
+                        <div class="time">۰۸:۰۰</div>
+                        <div class="city">مشهد - ترمینال امام رضا</div>
+                    </div>
+                </div>
+
+                <div class="bus-company">
+                    <div class="bus-company-logo">VIP</div>
+                    <span>شرکت مسافربری آسمان</span>
+                </div>
+
+                <div class="bus-features">
+                    <span>اینترنت رایگان</span>
+                    <span>پذیرایی</span>
+                    <span>صندلی راحت</span>
+                </div>
+
+                <div class="bus-seats">
+                    <i class="fas fa-chair"></i>
+                    <span>۱۵ صندلی خالی</span>
+                </div>
+
+                <button class="book-btn">رزرو بلیط</button>
+            </div>
+
+            <div class="bus-route-card">
+                <div class="bus-route-header">
+                    <div class="bus-route-title">تهران - اصفهان</div>
+                    <div class="bus-route-price">از ۹۰,۰۰۰ تومان</div>
+                </div>
+
+                <div class="bus-route-details">
+                    <div class="bus-route-time">
+                        <div class="time">۱۴:۳۰</div>
+                        <div class="city">تهران - ترمینال جنوب</div>
+                    </div>
+
+                    <div class="bus-duration">۶ ساعت</div>
+
+                    <div class="bus-route-time">
+                        <div class="time">۲۰:۳۰</div>
+                        <div class="city">اصفهان - ترمینال کاوه</div>
+                    </div>
+                </div>
+
+                <div class="bus-company">
+                    <div class="bus-company-logo">سپ</div>
+                    <span>شرکت سپهر سیر</span>
+                </div>
+
+                <div class="bus-features">
+                    <span>کولر گازی</span>
+                    <span>یخچال</span>
+                    <span>تلویزیون</span>
+                </div>
+
+                <div class="bus-seats">
+                    <i class="fas fa-chair"></i>
+                    <span>۸ صندلی خالی</span>
+                </div>
+
+                <button class="book-btn">رزرو بلیط</button>
+            </div>
+
+            <div class="bus-route-card">
+                <div class="bus-route-header">
+                    <div class="bus-route-title">تهران - شیراز</div>
+                    <div class="bus-route-price">از ۲۲۰,۰۰۰ تومان</div>
+                </div>
+
+                <div class="bus-route-details">
+                    <div class="bus-route-time">
+                        <div class="time">۱۹:۰۰</div>
+                        <div class="city">تهران - ترمینال غرب</div>
+                    </div>
+
+                    <div class="bus-duration">۱۴ ساعت</div>
+
+                    <div class="bus-route-time">
+                        <div class="time">۰۹:۰۰</div>
+                        <div class="city">شیراز - ترمینال کاراندیش</div>
+                    </div>
+                </div>
+
+                <div class="bus-company">
+                    <div class="bus-company-logo">آس</div>
+                    <span>اتوبوسرانی آسان سفر</span>
+                </div>
+
+                <div class="bus-features">
+                    <span>اتوبوس خواب</span>
+                    <span>پتو و بالش</span>
+                    <span>صبحانه</span>
+                </div>
+
+                <div class="bus-seats">
+                    <i class="fas fa-chair"></i>
+                    <span>۵ صندلی خالی</span>
+                </div>
+
+                <button class="book-btn">رزرو بلیط</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terminals Section -->
+<section class="terminals-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>ترمینال‌های اصلی</h2>
+            <p>ترمینال‌های مدرن با بهترین امکانات</p>
+        </div>
+
+        <div class="terminals-grid">
+            <div class="terminal-card">
+                <div class="terminal-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>ترمینال بیهقی تهران</h3>
+                <p>بزرگترین و مدرن‌ترین ترمینال اتوبوسرانی تهران با امکانات کامل</p>
+
+                <div class="terminal-info">
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان استاد مطهری</li>
+                        <li><i class="fas fa-phone"></i> ۰۲۱-۸۸۷۶۵۴۳۲</li>
+                        <li><i class="fas fa-clock"></i> ۲۴ ساعته</li>
+                    </ul>
+                </div>
+
+                <button class="book-btn secondary">مشاهده مسیرها</button>
+            </div>
+
+            <div class="terminal-card">
+                <div class="terminal-icon">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <h3>ترمینال امام رضا مشهد</h3>
+                <p>ترمینال اصلی مشهد با دسترسی آسان به حرم امام رضا</p>
+
+                <div class="terminal-info">
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> مشهد، بلوار احمدآباد</li>
+                        <li><i class="fas fa-phone"></i> ۰۵۱-۳۷۶۵۴۳۲۱</li>
+                        <li><i class="fas fa-clock"></i> ۲۴ ساعته</li>
+                    </ul>
+                </div>
+
+                <button class="book-btn secondary">مشاهده مسیرها</button>
+            </div>
+
+            <div class="terminal-card">
+                <div class="terminal-icon">
+                    <i class="fas fa-archway"></i>
+                </div>
+                <h3>ترمینال کاوه اصفهان</h3>
+                <p>ترمینال مدرن اصفهان با معماری سنتی و امکانات نوین</p>
+
+                <div class="terminal-info">
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> اصفهان، خیابان کاوه</li>
+                        <li><i class="fas fa-phone"></i> ۰۳۱-۳۴۵۶۷۸۹۰</li>
+                        <li><i class="fas fa-clock"></i> ۵ صبح تا ۱۲ شب</li>
+                    </ul>
+                </div>
+
+                <button class="book-btn secondary">مشاهده مسیرها</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bus Schedule Section -->
+<section class="bus-schedule-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>جدول زمان‌بندی اتوبوس‌ها</h2>
+            <p>برنامه حرکت اتوبوس‌های بین شهری</p>
+        </div>
+
+        <table class="bus-schedule-table">
+            <thead>
+            <tr>
+                <th>مسیر</th>
+                <th>شرکت</th>
+                <th>نوع اتوبوس</th>
+                <th>ساعت حرکت</th>
+                <th>ساعت رسیدن</th>
+                <th>قیمت</th>
+                <th>وضعیت</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>تهران - مشهد</td>
+                <td>آسمان</td>
+                <td><span class="bus-type">VIP</span></td>
+                <td>۲۲:۰۰</td>
+                <td>۰۸:۰۰</td>
+                <td>۱۸۰,۰۰۰ تومان</td>
+                <td class="availability">۱۵ صندلی</td>
+            </tr>
+            <tr>
+                <td>تهران - اصفهان</td>
+                <td>سپهر سیر</td>
+                <td><span class="bus-type">معمولی</span></td>
+                <td>۱۴:۳۰</td>
+                <td>۲۰:۳۰</td>
+                <td>۹۰,۰۰۰ تومان</td>
+                <td class="availability low">۸ صندلی</td>
+            </tr>
+            <tr>
+                <td>تهران - شیراز</td>
+                <td>آسان سفر</td>
+                <td><span class="bus-type">اتوبوس خواب</span></td>
+                <td>۱۹:۰۰</td>
+                <td>۰۹:۰۰</td>
+                <td>۲۲۰,۰۰۰ تومان</td>
+                <td class="availability low">۵ صندلی</td>
+            </tr>
+            <tr>
+                <td>تهران - تبریز</td>
+                <td>ایران پیما</td>
+                <td><span class="bus-type">VIP</span></td>
+                <td>۲۰:۰۰</td>
+                <td>۰۷:۰۰</td>
+                <td>۱۶۰,۰۰۰ تومان</td>
+                <td class="availability">۲۰ صندلی</td>
+            </tr>
+            <tr>
+                <td>تهران - یزد</td>
+                <td>یزد سیر</td>
+                <td><span class="bus-type">معمولی</span></td>
+                <td>۱۶:۰۰</td>
+                <td>۲۳:۰۰</td>
+                <td>۱۱۰,۰۰۰ تومان</td>
+                <td class="availability sold-out">تکمیل</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>بخش اتوبوس</h3>
+                <p>رزرو آنلاین بلیط اتوبوس‌های VIP و معمولی به تمامی مقاصد داخلی.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>لینک‌های مفید</h3>
+                <ul>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                    <li><a href="#">قوانین رزرو اتوبوس</a></li>
+                    <li><a href="#">سوالات متداول</a></li>
+                    <li><a href="#">وبلاگ سفر</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>خدمات اتوبوس</h3>
+                <ul>
+                    <li><a href="#">اتوبوس‌های VIP</a></li>
+                    <li><a href="#">اتوبوس‌های خواب</a></li>
+                    <li><a href="#">اتوبوس‌های توریستی</a></li>
+                    <li><a href="#">رزرو گروهی</a></li>
+                    <li><a href="#">ترمینال‌ها</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>تماس با ما</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> ۰۲۱-۹۱۰۱۱۱۱۱</li>
+                    <li><i class="fas fa-envelope"></i> bus@hotelplus.ir</li>
+                    <li><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© ۲۰۲۴ تمامی حقوق برای هتل‌مارکوپولو محفوظ است.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // مدیریت تب‌ها
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // مدیریت انتخاب کلاس اتوبوس
+    document.querySelectorAll('.bus-class-option').forEach(option => {
+        option.addEventListener('click', function () {
+            document.querySelectorAll('.bus-class-option').forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // تنظیم تاریخ پیش‌فرض (فردا)
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('bus-date').value = tomorrow.toISOString().split('T')[0];
+
+    // انیمیشن اسکرول هدر
+    window.addEventListener('scroll', function () {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+        }
+    });
+
+    // شبیه‌سازی جستجو
+    document.getElementById('search-bus').addEventListener('click', function () {
+        const origin = document.getElementById('bus-origin').value;
+        const destination = document.getElementById('bus-destination').value;
+        const date = document.getElementById('bus-date').value;
+        const selectedClass = document.querySelector('.bus-class-option.active').getAttribute('data-class');
+
+        if (origin && destination) {
+            const classNames = {
+                'normal': 'اتوبوس معمولی',
+                'vip': 'اتوبوس VIP',
+                'sleeper': 'اتوبوس خواب',
+                'tourist': 'تور گردشگری'
+            };
+
+            alert(`در حال جستجوی اتوبوس از ${origin} به ${destination} در تاریخ ${date} با کلاس ${classNames[selectedClass]} ...`);
+        } else {
+            alert('لطفاً مبدأ و مقصد را وارد کنید.');
+        }
+    });
+
+    // شبیه‌سازی رزرو بلیط
+    document.querySelectorAll('.book-btn').forEach((btn, index) => {
+        if (!btn.classList.contains('secondary')) {
+            btn.addEventListener('click', function () {
+                const card = this.closest('.bus-route-card');
+                const route = card.querySelector('.bus-route-title').textContent;
+                const price = card.querySelector('.bus-route-price').textContent;
+
+                alert(`رزرو بلیط ${route} به مبلغ ${price} با موفقیت انجام شد!`);
+            });
+        }
+    });
+</script>
+<script src="config.js"></script>
+<script src="bus.js"></script>
+</body>
+</html>

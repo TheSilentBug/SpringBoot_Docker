@@ -1,8 +1,11 @@
 /**
  * فایل تنظیمات برای تعیین آدرس بک‌اند
- * در Docker Compose، سرویس بک‌اند از طریق 'http://backend:8080' قابل دسترسی است
- * در محیط توسعه محلی، از 'http://localhost:8080' استفاده می‌شود
+ * در Docker، nginx درخواست‌های /api را به backend proxy می‌کند
+ * در محیط محلی، از localhost:8080 استفاده می‌شود
  */
-window.BACKEND_BASE_URL = window.BACKEND_BASE_URL || 'http://localhost:8080'; // fallback به محیط محلی در صورت نبود مقدار
+// استفاده از مسیر نسبی در Docker (nginx proxy می‌کند) یا localhost در محیط محلی
+window.BACKEND_BASE_URL = window.BACKEND_BASE_URL || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8080'
+    : ''); // در Docker از مسیر نسبی استفاده می‌کنیم چون nginx proxy می‌کند
 
 
